@@ -1,0 +1,3 @@
+[submodule "users/node_modules/rsnbl"]
+	path = users/node_modules/rsnbl
+	url = git://github.com/chesles/rsnbl.git
