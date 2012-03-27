@@ -84,7 +84,7 @@ UserRestHandler = rsnbl.RequestHandler.extend({
 });
 
 UserService = new rsnbl.Application([
-        [/\/(.*)/, UserRestHandler]
+        [/\/([a-z0-9]*)/i, UserRestHandler]
     ]);
 
 db.open(function() {
