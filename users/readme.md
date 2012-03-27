@@ -12,10 +12,11 @@ The users service is written for node.js. There are a few dependencies:
 And a few node modules (install npm, the node package manager, to get most of these):
 
   - connect
+  - node-mongodb-native (mongodb)
   - underscore
   - rsnbl (included as submodule)
 
-Use `npm install underscore connect` inside of the users directory (i.e. this one) to get these. To get the `rsnbl` submodule to install, run `git submodule init` and then `git submodule update`, and it should check out the right version for you into the right place.
+Use `npm install underscore connect mongodb` inside of the users directory (i.e. this one) to get these. To get the `rsnbl` submodule to install, run `git submodule init` and then `git submodule update`, and it should check out the right version for you into the right place.
 
 # running it
 
