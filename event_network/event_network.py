@@ -19,7 +19,7 @@ class UserCheckedInHandler(EventHandler):
     def fired(self, attributes):
         user_id = long(attributes['user_id'][0])
         user = get_user_by_id(user_id)
-        if !user:
+        if not user:
             raise tornado.web.HTTPError(400, "Unknown user id %d" % user_id)
 
         location = ""   # TODO: What is this
@@ -39,7 +39,7 @@ class NewRemniderSentHandler(EventHandler):
     def fired(self, attributes):
         user_id = long(attributes['user_id'][0])
         user = get_user_by_id(user_id)
-        if !user:
+        if not user:
             raise tornado.web.HTTPError(400, "Unknown user id %d" % user_id)
 
 
@@ -47,7 +47,7 @@ class ReminderListAvailableHandler(EventHandler):
     def fired(self, attributes):
         user_id = long(attributes['user_id'][0])
         user = get_user_by_id(user_id)
-        if !user:
+        if not user:
             raise tornado.web.HTTPError(400, "Unknown user id %d" % user_id)
         phone_number = user.phone_number()
 

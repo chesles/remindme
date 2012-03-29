@@ -2,6 +2,15 @@ class Reminder:
 
     reminder_count = 0
 
+    @classmethod
+    def parse(cls, text):
+        parts = text.split('@')
+        if len(parts) != 2:
+            raise Exception('Invalid reminder syntax "%s"' % text)
+        item = parts[0].strip()
+        location = parts[1].strip()
+        return Reminder(item, location)
+
     def __init__ (self, item, location):
         Reminder.reminder_count = Reminder.reminder_count + 1
         self._reminder_id = Reminder.reminder_count
