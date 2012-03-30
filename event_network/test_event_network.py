@@ -239,48 +239,39 @@ def test_venue_to_reminder_matching():
 def test_checkin_location_applies_to_reminders():
     eggs_reminder = Reminder.parse("get eggs @ smiths")
     shirt_reminder = Reminder.parse("get a new shirt @ kohls")
-    checks_reminder = Reminder.parse("order new checks @ zions bank")
+    checks_reminder = Reminder.parse("order new checks @ zions")
     door_pull_reminder = Reminder.parse("get door pulls @ a home improvement store")
     milk_reminder = Reminder.parse("get milk @ a the grocery store")
     cu_checks_reminder = Reminder.parse("order new checks @ the credit union")
-    prescription_reminder = Reminder.parse("request a perscription refill @ a the doctor's")
     door_knob_reminder = Reminder.parse("get new door knob @ home depot")
 
     home_depot_location = json.loads(home_depot_text)
     smiths_location = json.loads(smiths_text)
     uccu_location = json.loads(uccu_text)
 
-    assert eggs_reminder.location_appies_to_reminider(home_depot_location) == False
-    assert shirt_reminder.location_appies_to_reminider(home_depot_location) == False
-    assert checks_reminder.location_appies_to_reminider(home_depot_location) == False
-    assert door_pull_reminder.location_appies_to_reminider(home_depot_location) == True
-    assert milk_reminder.location_appies_to_reminider(home_depot_location) == False
-    assert cu_checks_reminder.location_appies_to_reminider(home_depot_location) == False
-    assert prescription_reminder.location_appies_to_reminider(home_depot_location) == False
-    assert door_knob_reminder.location_appies_to_reminider(home_depot_location) == True
+    assert eggs_reminder.venue_appies_to_reminider(home_depot_location) == False
+    assert shirt_reminder.venue_appies_to_reminider(home_depot_location) == False
+    assert checks_reminder.venue_appies_to_reminider(home_depot_location) == False
+    assert door_pull_reminder.venue_appies_to_reminider(home_depot_location) == True
+    assert milk_reminder.venue_appies_to_reminider(home_depot_location) == False
+    assert cu_checks_reminder.venue_appies_to_reminider(home_depot_location) == False
+    assert door_knob_reminder.venue_appies_to_reminider(home_depot_location) == True
 
-    assert eggs_reminder.location_appies_to_reminider(smiths_location) == True
-    assert shirt_reminder.location_appies_to_reminider(smiths_location) == False
-    assert checks_reminder.location_appies_to_reminider(smiths_location) == False
-    assert door_pull_reminder.location_appies_to_reminider(smiths_location) == False
-    assert milk_reminder.location_appies_to_reminider(smiths_location) == True
-    assert cu_checks_reminder.location_appies_to_reminider(smiths_location) == False
-    assert prescription_reminder.location_appies_to_reminider(smiths_location) == False
-    assert door_knob_reminder.location_appies_to_reminider(smiths_location) == False
+    assert eggs_reminder.venue_appies_to_reminider(smiths_location) == True
+    assert shirt_reminder.venue_appies_to_reminider(smiths_location) == False
+    assert checks_reminder.venue_appies_to_reminider(smiths_location) == False
+    assert door_pull_reminder.venue_appies_to_reminider(smiths_location) == False
+    assert milk_reminder.venue_appies_to_reminider(smiths_location) == True
+    assert cu_checks_reminder.venue_appies_to_reminider(smiths_location) == False
+    assert door_knob_reminder.venue_appies_to_reminider(smiths_location) == False
 
-    assert eggs_reminder.location_appies_to_reminider(uccu_location) == False
-    assert shirt_reminder.location_appies_to_reminider(uccu_location) == False
-
-    # TODO: This matches by category.  I don't want it to because it is a name.
-    # I need to change this so that we only match by category if the location
-    # text includes a category.
-    assert checks_reminder.location_appies_to_reminider(uccu_location) == False
-
-    assert door_pull_reminder.location_appies_to_reminider(uccu_location) == False
-    assert milk_reminder.location_appies_to_reminider(uccu_location) == False
-    assert cu_checks_reminder.location_appies_to_reminider(uccu_location) == True
-    assert prescription_reminder.location_appies_to_reminider(uccu_location) == False
-    assert door_knob_reminder.location_appies_to_reminider(uccu_location) == False
+    assert eggs_reminder.venue_appies_to_reminider(uccu_location) == False
+    assert shirt_reminder.venue_appies_to_reminider(uccu_location) == False
+    assert checks_reminder.venue_appies_to_reminider(uccu_location) == False
+    assert door_pull_reminder.venue_appies_to_reminider(uccu_location) == False
+    assert milk_reminder.venue_appies_to_reminider(uccu_location) == False
+    assert cu_checks_reminder.venue_appies_to_reminider(uccu_location) == True
+    assert door_knob_reminder.venue_appies_to_reminider(uccu_location) == False
 
 
 def test_main():

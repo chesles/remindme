@@ -42,11 +42,11 @@ class Reminder:
     def inactivate(self):
         self._active = False
 
-    def location_appies_to_reminider(self, location):
-        if self.venue_name_applies_to_location(location['name']):
+    def venue_appies_to_reminider(self, venue):
+        if self.venue_name_applies_to_location(venue['name']):
             return True
         
-        for category in location['categories']:
+        for category in venue['categories']:
             if self.category_applies_to_location(category['shortName']) or self.category_applies_to_location(category['name']):
                 return True
 
@@ -60,6 +60,11 @@ class Reminder:
 
     def category_applies_to_location(self, category):
         return Category.category_matches_location(category, self._location)
+
+    def assign_to_user(self, user_id):
+        if not reminders.has_key(user_id):
+            reminders[user_id] = []
+        reminders[user_id].append(self)
 
 
 reminders = {1 : [Reminder('Get door pulls for pantry', 'Home improvement store')]}
