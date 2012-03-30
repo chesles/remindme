@@ -1,3 +1,6 @@
+from categories import *
+
+
 class Reminder:
 
     reminder_count = 0
@@ -38,6 +41,25 @@ class Reminder:
 
     def inactivate(self):
         self._active = False
+
+    def location_appies_to_reminider(self, location):
+        if self.venue_name_applies_to_location(location['name']):
+            return True
+        
+        for category in location['categories']:
+            if self.category_applies_to_location(category['shortName']) or self.category_applies_to_location(category['name']):
+                return True
+
+        return False
+
+    def venue_name_applies_to_location(self, venue_name):
+        venue_name = remove_punc(venue_name.lower())
+        location = remove_punc(self._location.lower())
+
+        return venue_name in location or location in venue_name
+
+    def category_applies_to_location(self, category):
+        return Category.category_matches_location(category, self._location)
 
 
 reminders = {1 : [Reminder('Get door pulls for pantry', 'Home improvement store')]}

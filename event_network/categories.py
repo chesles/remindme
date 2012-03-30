@@ -1,5 +1,6 @@
 import re
 import string
+import httplib
 
 
 regex = re.compile('[%s]' % re.escape(string.punctuation))
@@ -11,9 +12,10 @@ def remove_punc(s):
 class Category:
 
     category_map = {}
+    fsqr_categories = []
 
     @classmethod
-    def resolve(cls, category_text):
+    def get_category_from_location(cls, category_text):
         # First see if we get an exact match
         if Category.category_map.has_key(category_text):
             Category.category_map[category_text]
@@ -32,7 +34,7 @@ class Category:
         return None
 
     @classmethod
-    def load_categories(cls):
+    def load_category_aliases(cls):
         file = open('categories.map')
         for line in file:
             line = line.strip()
@@ -48,6 +50,23 @@ class Category:
                         alias = alias.strip()
                         #print "%s => %s" % (alias, category)
                         Category.category_map[alias] = category
+
+    @classmethod
+    def load_fsqr_categories(cls):
+        connection = httplib.HTTPConnection('api.foursquare.com')
+        https://api.foursquare.com/v2/venues/categories?oauth_token=RGM52JFE0XDSLVO1O15BC1TTDEU2XT1RUBCJBXL4QQ1ASUHA&v=20120327
+
+    @classmethod
+    def category_matches_location(cls, category, location):
+        # See if the location without punctuation contains the category text without punctuation (with differning case)
+        if remove_punc(category.lower()) in remove_punc(location.lower()):
+            return True
+
+        resolved_category = Category.get_category_from_location(location)
+        if not resolved_category:
+            return False
+
+        return resolved_category.lower() == category.lower()
 
 
 Category.load_categories()
