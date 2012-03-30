@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>Remindme Event Network Test Page</title>
+    </head>
+    <body>
+        <h3>Remindme Event Network Test Page</h3>
+        <table>
+            <tr>
+                <th>
+                    Send Events
+                </th>
+                <th>
+                    Reminder List
+                </th>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <form action="/event/user/new_reminder" method="post">
+                        <fieldset>
+                            <legend>Send 'new_reminder' Event</legend><br/>
+                            <table>
+                                <tr>
+                                    <td valign="top">
+                                        user_name:
+                                    </td>
+                                    <td valign="top">
+                                        <input type="text" name="user_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                        reminder_text:
+                                    </td>
+                                    <td valign="top">
+                                        <textarea type="text" name="reminder_text" cols="40" rows="4" maxlength="160"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" colspan="2">
+                                        <input type="submit" value="Send Event"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+
+                        <input type="hidden" name="_domain" value="user"/>
+                        <input type="hidden" name="_name" value="new_reminder"/>
+                        <input type="hidden" name="from_test_page" value="1"/>
+                    </form>
+                    
+                    <form action="/event/user/checked_in" method="post">
+                        <fieldset>
+                            <legend>Send 'user_checked_in' Event</legend><br/>
+                            <table>
+                                <tr>
+                                    <td valign="top">
+                                        user_name:
+                                    </td>
+                                    <td valign="top">
+                                        <input type="text" name="user_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">
+                                        venue:
+                                    </td>
+                                    <td valign="top">
+                                        <textarea type="text" name="venue" rows="15" cols="40"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" colspan="2">
+                                        <input type="submit" value="Send Event"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                        <input type="hidden" name="_domain" value="ruser"/>
+                        <input type="hidden" name="_name" value="checked_in"/>
+                        <input type="hidden" name="from_test_page" value="1"/>
+                    </form>
+                </td>
+                <td valign="top">
+                    <fieldset>
+                        <legend>Reminders</legend>
+                        <ul>
+                        {% for reminder in reminders %}
+                            <li>{{ reminder.item() }} @ {{ reminder.location() }}</li>                    
+                        {% end %}
+                        </ul>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
