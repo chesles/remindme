@@ -1,8 +1,23 @@
 import tornado.web
+import requests
+from conf import settings
+import json
 
 class ExternalEventHandler(tornado.web.RequestHandler):
     # implement common functionality here: a generic getuser method, perhaps?
-    pass
+    def getuser(self, **kwargs):
+        url = "http://" + settings.users.host + ":" + settings.users.port + "/"
+        users_json = requests.get(url, params=kwargs)
+        users = json.loads(users_json.text)
+        if len(users) > 0:
+            return users[0]
+        else:
+            return None
+
+    def send_event(**event):
+        url = "http://" + settings.eventnetwork.host + ":" + settings.eventnetwork.port + "/"
+        return requests.post(url, data=event)
+
 
 """ TwilioHandler: processes SMS messages sent from users
 
@@ -29,7 +44,16 @@ Data sent from Twilio looks like this:
 class TwilioHandler(ExternalEventHandler):
     def post(self):
         # TODO: package data into an internal event and forward it
-        print self.request.body
+        # print self.request.body
+        print "Getting user: " + self.get_argument("From")
+        user = self.getuser(phone=self.get_argument("From"))
+        if user is None:
+            print "No user found"
+        else:
+            self.send_event(_domain="user", _name="new_reminder",
+                    user_name=user.username, reminder_text=self.get_argument("Body"))
+            
+
 
 """
 Foursquare handler: receives location updates via Foursquare's realtime API
@@ -100,8 +124,17 @@ Data sent by Foursquare looks like this:
 """
 class FoursquareHandler(ExternalEventHandler):
     def post(self):
-        # TODO: package data into an internal event and forward it
         if 'checkin' in self.request.arguments:
-            print self.request.arguments['checkin']
+            checkin = json.loads(self.get_argument('checkin'))
+            fsqu = checkin['user']
+            venue = checkin['venue']
+            user = self.getuser(fsqid=fsqu['id'])
+            if user is None:
+                # TODO: handle unknown users? there really shouldn't be any unknown users...
+                pass
+            else:
+                self.send_event(_domain = 'user', _name = 'checked_in',
+                        user_name = user.username, venue = json.dumps(venue))
+
         else:
-            print self.request.body
+            pass

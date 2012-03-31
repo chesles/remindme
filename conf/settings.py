@@ -5,3 +5,12 @@ ssl_options = {
     "keyfile": os.path.join(os.getcwd(), 'conf', 'ssl', 'server.key'),
 }
 
+users = {
+    "host": "localhost",
+    "port": 8082
+}
+
+eventnetwork = {
+    "host": "localhost",
+    "port": 8080
+}
