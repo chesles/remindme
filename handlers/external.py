@@ -15,7 +15,10 @@ class ExternalEventHandler(tornado.web.RequestHandler):
             return None
 
     def send_event(**event):
-        url = "http://" + settings.eventnetwork.host + ":" + settings.eventnetwork.port + "/"
+        url = "http://" + settings.eventnetwork.host + ":" + settings.eventnetwork.port + "/event/"
+        url += event['domain'] + '/'
+        url += event['name']
+        del event['domain'], event['name']
         return requests.post(url, data=event)
 
 
@@ -50,7 +53,7 @@ class TwilioHandler(ExternalEventHandler):
         if user is None:
             print "No user found"
         else:
-            self.send_event(_domain="user", _name="new_reminder",
+            self.send_event(domain="user", name="new_reminder",
                     user_name=user.username, reminder_text=self.get_argument("Body"))
             
 
@@ -133,7 +136,7 @@ class FoursquareHandler(ExternalEventHandler):
                 # TODO: handle unknown users? there really shouldn't be any unknown users...
                 pass
             else:
-                self.send_event(_domain = 'user', _name = 'checked_in',
+                self.send_event(domain = 'user', name = 'checked_in',
                         user_name = user.username, venue = json.dumps(venue))
 
         else:
