@@ -1,0 +1,83 @@
+Events
+======
+
+user:new_reminder
+-----------------
+ - user_name : string
+ - reminder_text : string
+
+user:checked_in
+---------------
+ - user_name : string
+ - venue : JSON string from Foursquare checkin.  See description of venue below.
+
+reminder:list_available
+-----------------------
+ - user_name : string
+ - venue_name : string (Friendly name of venue to display in the text to the user.)
+ - reminder_list : JSON string containing list of reminders
+
+
+Notes
+=====
+
+venue attribute detail
+----------------------
+Simply the JSON contianing the Foursquare venue.  We don't really need all of it
+but it doesn't hurt to send it.
+
+Example:
+
+{
+  "id":"4b53b968f964a52045a927e3",
+  "name":"Smith's Marketplace",
+  "contact":{
+     "phone":"8013416500",
+     "formattedPhone":"(801) 341-6500"
+  },
+  "location":{
+     "address":"1550 E 3500 N",
+     "lat":40.43029865281793,
+     "lng":-111.82464688468383,
+     "distance":1848,
+     "postalCode":"84043",
+     "city":"Lehi",
+     "state":"UT",
+     "country":"United States"
+  },
+  "categories":[
+     {
+        "id":"4bf58dd8d48988d118951735",
+        "name":"Grocery or Supermarket",
+        "pluralName":"Grocery or Supermarkets",
+        "shortName":"Grocery Store",
+        "icon":{
+           "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/food_grocery_",
+           "sizes":[
+              32,
+              44,
+              64,
+              88,
+              256
+           ],
+           "name":".png"
+        },
+        "primary":true
+     }
+  ],
+  "verified":false,
+  "stats":{
+     "checkinsCount":1261,
+     "usersCount":268,
+     "tipCount":12
+  },
+  "specials":{
+     "count":0,
+     "items":[
+
+     ]
+  },
+  "hereNow":{
+     "count":2
+  }
+}

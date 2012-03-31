@@ -244,6 +244,7 @@ def test_checkin_location_applies_to_reminders():
     milk_reminder = Reminder.parse("get milk @ a the grocery store")
     cu_checks_reminder = Reminder.parse("order new checks @ the credit union")
     door_knob_reminder = Reminder.parse("get new door knob @ home depot")
+    door_pull_reminder2 = Reminder.parse('Get door pulls for pantry @ Home improvement store')
 
     home_depot_location = json.loads(home_depot_text)
     smiths_location = json.loads(smiths_text)
@@ -253,6 +254,7 @@ def test_checkin_location_applies_to_reminders():
     assert shirt_reminder.venue_appies_to_reminider(home_depot_location) == False
     assert checks_reminder.venue_appies_to_reminider(home_depot_location) == False
     assert door_pull_reminder.venue_appies_to_reminider(home_depot_location) == True
+    assert door_pull_reminder2.venue_appies_to_reminider(home_depot_location) == True
     assert milk_reminder.venue_appies_to_reminider(home_depot_location) == False
     assert cu_checks_reminder.venue_appies_to_reminider(home_depot_location) == False
     assert door_knob_reminder.venue_appies_to_reminider(home_depot_location) == True
@@ -261,6 +263,7 @@ def test_checkin_location_applies_to_reminders():
     assert shirt_reminder.venue_appies_to_reminider(smiths_location) == False
     assert checks_reminder.venue_appies_to_reminider(smiths_location) == False
     assert door_pull_reminder.venue_appies_to_reminider(smiths_location) == False
+    assert door_pull_reminder2.venue_appies_to_reminider(smiths_location) == False
     assert milk_reminder.venue_appies_to_reminider(smiths_location) == True
     assert cu_checks_reminder.venue_appies_to_reminider(smiths_location) == False
     assert door_knob_reminder.venue_appies_to_reminider(smiths_location) == False
@@ -269,6 +272,7 @@ def test_checkin_location_applies_to_reminders():
     assert shirt_reminder.venue_appies_to_reminider(uccu_location) == False
     assert checks_reminder.venue_appies_to_reminider(uccu_location) == False
     assert door_pull_reminder.venue_appies_to_reminider(uccu_location) == False
+    assert door_pull_reminder2.venue_appies_to_reminider(uccu_location) == False
     assert milk_reminder.venue_appies_to_reminider(uccu_location) == False
     assert cu_checks_reminder.venue_appies_to_reminider(uccu_location) == True
     assert door_knob_reminder.venue_appies_to_reminider(uccu_location) == False
