@@ -5,8 +5,11 @@ import tornado.ioloop
 import tornado.web
 
 import json
-from twilio.rest import TwilioRestClient    # TODO: Move this into an SMS nofitication handler
 import unicodedata
+
+import httplib, urllib
+
+import sms_notification_handler
 
 from user import *
 from reminder import *
@@ -19,8 +22,9 @@ class EventHandler(tornado.web.RequestHandler):
     def post(self, domain, name):
         self.set_header("Content-Type", "text/plain")
         self.write('got event %s:%s\n' % (domain,name))
+        print 'got event %s:%s\n' % (domain,name)
         if not self.request.arguments.has_key('from_test_page'):
-            self.finish()  # Comment this line out for debugging
+            self.finish()  # If this event was not received from the test page, call finish here to respond back to the client.  This makes the event processsing asynchronous.
         self.fired(self.request.arguments)
         if self.request.arguments.has_key('from_test_page'):
             self.redirect("/")
@@ -31,6 +35,21 @@ class UnknownEventHandler(EventHandler):
         pass
 
 
+class NewRemniderSentHandler(EventHandler):
+    def fired(self, attributes):
+        user_name = attributes['user_name'][0]
+
+        print 'Looking for user %s' % user_name
+        user = User.get_by_user_name(user_name)
+        if not user:
+            print 'Error: Unknown user_name "%s"' % user_name
+        print 'Found user "%s"' % user_name
+
+        reminder = Reminder.parse(attributes['reminder_text'][0])
+
+        user.add_reminder(reminder)
+
+
 class UserCheckedInHandler(EventHandler):
     def fired(self, attributes):
         user_name = attributes['user_name'][0]
@@ -38,7 +57,7 @@ class UserCheckedInHandler(EventHandler):
         print 'Looking for user %s' % user_name
         user = User.get_by_user_name(user_name)
         if not user:
-            raise tornado.web.HTTPError(400, "Unknown user_name %s" % user_name)
+            print 'Error: Unknown user_name "%s"' % user_name
         print 'Found user "%s"' % user_name
 
         venue_str = attributes['venue'][0]
@@ -60,9 +79,34 @@ class UserCheckedInHandler(EventHandler):
             for reminder in reminder_list:
                 print '  %s' % reminder
 
-        event_map = {"user_name" : user_name, "venue" : venue, "reminder_list" : reminder_list}
+        event_map = {"_domain" : "reminder", "_name" : "list_available", "user_name" : user_name, "venue_name" : venue['name'], "reminder_list" : json.dumps(reminder_list)}
         print 'Sending "reminder:list_available" event with attributes "%s"' % json.dumps(event_map)
-        message = 'While you\'re at "%s" be sure to: ' % venue['name']
+
+        # Send the post
+        params = urllib.urlencode(event_map)
+        headers = {"Content-type": "application/x-www-form-urlencoded",
+                   "Accept": "text/plain"}
+        connection = httplib.HTTPConnection("localhost", 8080)
+        connection.request("POST", "/event/reminder/list_available", params, headers)
+        print 'Sent reminder:list_available event'
+
+
+class ReminderListAvailableHandler(EventHandler):
+    def fired(self, attributes):
+        print 'Retrieving event attributes'
+
+        user_name = attributes['user_name'][0]
+        print 'user_name: %s' % user_name
+
+        venue_name = attributes['venue_name'][0]
+        print 'venue_name: "%s"' % venue_name
+
+        reminder_list_str = attributes['reminder_list'][0]
+        print 'reminder_list: %s' % reminder_list_str
+        reminder_list = json.loads(reminder_list_str)
+
+        # Generate the message to send to the user.
+        message = 'While you\'re at "%s" remember to: ' % venue_name
         for i in range(len(reminder_list)):
             message = message + ' %s' % reminder_list[i]
             if i == len(reminder_list) - 1:
@@ -70,40 +114,12 @@ class UserCheckedInHandler(EventHandler):
             else:
                 message = message + ','
 
-        # TODO: Move this into an SMS nofitication handler
-        client = TwilioRestClient('AC7de62158f793498e846749097dc57f6e', '8e59de93a11b2883a5929189edfc9b7b')
-        sms_message = client.sms.messages.create(from_="+18016580216", to=user.phone_number(), body=message)
+        print 'Sending message to user: "%s"' % message
+
+        # Send the messge to the user.
+        sms_notification_handler.notify_user(user_name, message)
 
 
-class NewRemniderSentHandler(EventHandler):
-    def fired(self, attributes):
-        user_name = attributes['user_name'][0]
-
-        print 'Looking for user %s' % user_name
-        user = User.get_by_user_name(user_name)
-        if not user:
-            raise tornado.web.HTTPError(400, "Unknown user_name %s" % user_name)
-        print 'Found user "%s"' % user_name
-
-        reminder = Reminder.parse(attributes['reminder_text'][0])
-
-        user.add_reminder(reminder)
-
-
-class ReminderListAvailableHandler(EventHandler):
-    def fired(self, attributes):
-        user_name = attributes['user_name'][0]
-
-        print 'Looking for user %s' % user_name
-        user = User.get_by_user_name(user_name)
-        if not user:
-            raise tornado.web.HTTPError(400, "Unknown user_name %s" % user_name)
-        print 'Found user "%s"' % user_name
-
-        venue = attributes['venue'][0]
-        reminder_list = attributes['reminder_list'][0]
-
-        venue = json.loads(venue)
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
