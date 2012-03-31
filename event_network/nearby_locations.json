@@ -1,0 +1,1581 @@
+{
+   "meta":{
+      "code":200
+   },
+   "notifications":[
+      {
+         "type":"notificationTray",
+         "item":{
+            "unreadCount":0
+         }
+      }
+   ],
+   "response":{
+      "venues":[
+         {
+            "id":"4bb7d69a3db7b713bea5209a",
+            "name":"LDS Church Meetinghouse",
+            "contact":{
+
+            },
+            "location":{
+               "address":"N 1200 E",
+               "lat":40.414864306693815,
+               "lng":-111.82979106903076,
+               "distance":91,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d132941735",
+                  "name":"Church",
+                  "pluralName":"Churches",
+                  "shortName":"Church",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/religious_church_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":20,
+               "usersCount":6,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4b6451c9f964a5205faa2ae3",
+            "name":"Freedom Elementary",
+            "contact":{
+               "phone":"8017665270",
+               "formattedPhone":"(801) 766-5270"
+            },
+            "location":{
+               "address":"10326 N 6800 W",
+               "lat":40.420128773361945,
+               "lng":-111.82048916816711,
+               "distance":1074,
+               "postalCode":"84003",
+               "city":"Highland",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4f4533804b9074f6e4fb0105",
+                  "name":"Elementary School",
+                  "pluralName":"Elementary Schools",
+                  "shortName":"Elementary School",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/school_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":177,
+               "usersCount":26,
+               "tipCount":0
+            },
+            "url":"http:\/\/freedom.alpineschools.org\/",
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4eba0a3ce300cf4cac1bd50d",
+            "name":"LDS Church Meetinghouse",
+            "contact":{
+
+            },
+            "location":{
+               "address":"1200 E 900 N",
+               "lat":40.39821256648196,
+               "lng":-111.83082908391953,
+               "distance":1793,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d132941735",
+                  "name":"Church",
+                  "pluralName":"Churches",
+                  "shortName":"Church",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/religious_church_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":21,
+               "usersCount":4,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4bd475df6798ef3b8ba1618d",
+            "name":"LDS Church Meetinghouse",
+            "contact":{
+
+            },
+            "location":{
+               "lat":40.410927,
+               "lng":-111.832899,
+               "distance":424,
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d132941735",
+                  "name":"Church",
+                  "pluralName":"Churches",
+                  "shortName":"Church",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/religious_church_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":52,
+               "usersCount":8,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4b53b968f964a52045a927e3",
+            "name":"Smith's Marketplace",
+            "contact":{
+               "phone":"8013416500",
+               "formattedPhone":"(801) 341-6500"
+            },
+            "location":{
+               "address":"1550 E 3500 N",
+               "lat":40.43029865281793,
+               "lng":-111.82464688468383,
+               "distance":1848,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d118951735",
+                  "name":"Grocery or Supermarket",
+                  "pluralName":"Grocery or Supermarkets",
+                  "shortName":"Grocery Store",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/food_grocery_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":1261,
+               "usersCount":268,
+               "tipCount":12
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":2
+            }
+         },
+         {
+            "id":"4f69ee1be4b0316cb99a8944",
+            "name":"JaCo Masonry",
+            "contact":{
+
+            },
+            "location":{
+               "address":"1555 N 180 E, Lehi, UT 84043",
+               "lat":40.413217311172126,
+               "lng":-111.84166538360536,
+               "distance":945,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"Utah",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d124941735",
+                  "name":"Office",
+                  "pluralName":"Offices",
+                  "shortName":"Corporate \/ Office",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/default_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":4,
+               "usersCount":1,
+               "tipCount":1
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4eaaf15377c850207eff28ee",
+            "name":"Lehi Flying Field",
+            "contact":{
+
+            },
+            "location":{
+               "address":"Utah Highlands Drive",
+               "crossStreet":"3150 North",
+               "lat":40.427369,
+               "lng":-111.82814,
+               "distance":1467,
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d15f941735",
+                  "name":"Field",
+                  "pluralName":"Fields",
+                  "shortName":"Field",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/parks_outdoors\/default_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":14,
+               "usersCount":3,
+               "tipCount":1
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4ea172690aaf7111802b2831",
+            "name":"LDS Church Meetinghouse",
+            "contact":{
+
+            },
+            "location":{
+               "address":"6722 W 10400 N",
+               "lat":40.42122939916058,
+               "lng":-111.81938141584396,
+               "distance":1223,
+               "postalCode":"84003",
+               "city":"Highland",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d132941735",
+                  "name":"Church",
+                  "pluralName":"Churches",
+                  "shortName":"Church",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/religious_church_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":36,
+               "usersCount":9,
+               "tipCount":1
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4c4f91c738b0be9aaec011fc",
+            "name":"Smith's Fuel Stop",
+            "contact":{
+
+            },
+            "location":{
+               "address":"1594 E 3500 N",
+               "lat":40.431256,
+               "lng":-111.82429,
+               "distance":1959,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d113951735",
+                  "name":"Gas Station or Garage",
+                  "pluralName":"Gas Stations or Garages",
+                  "shortName":"Gas Station \/ Garage",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/gas_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":227,
+               "usersCount":58,
+               "tipCount":4
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4f236b54e4b01dc94a979dde",
+            "name":"Utah Community Credit Union",
+            "contact":{
+
+            },
+            "location":{
+               "address":"3281 N 1120 E",
+               "lat":40.42956610259513,
+               "lng":-111.83222166628705,
+               "distance":1702,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d10a951735",
+                  "name":"Bank",
+                  "pluralName":"Banks",
+                  "shortName":"Bank \/ Financial",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/financial_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":21,
+               "usersCount":6,
+               "tipCount":1
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4bc86dc814d79521df0069e9",
+            "name":"Renaissance Academy",
+            "contact":{
+               "phone":"8017684202",
+               "formattedPhone":"(801) 768-4202"
+            },
+            "location":{
+               "address":"3435 N 1120 E",
+               "lat":40.430019569487534,
+               "lng":-111.83244873490383,
+               "distance":1754,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d1a0941735",
+                  "name":"College Classroom",
+                  "pluralName":"College Classrooms",
+                  "shortName":"Classroom",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/education\/default_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":96,
+               "usersCount":15,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4efe36184690f6ece8b5271b",
+            "name":"Grease Monkey",
+            "contact":{
+               "phone":"8017666655",
+               "formattedPhone":"(801) 766-6655"
+            },
+            "location":{
+               "address":"1362 Timpanogos Hwy",
+               "lat":40.43095491054777,
+               "lng":-111.82761042462181,
+               "distance":1869,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d124951735",
+                  "name":"Automotive Shop",
+                  "pluralName":"Automotive Shops",
+                  "shortName":"Automotive",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/automotive_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":15,
+               "usersCount":8,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4c70243fb3ce224bc2ee72c6",
+            "name":"Slider's Gourmet",
+            "contact":{
+               "phone":"8017684555",
+               "formattedPhone":"(801) 768-4555"
+            },
+            "location":{
+               "address":"1594 E 3500 N",
+               "lat":40.431211,
+               "lng":-111.82337,
+               "distance":1977,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d16c941735",
+                  "name":"Burger Joint",
+                  "pluralName":"Burger Joints",
+                  "shortName":"Burgers",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/food\/burger_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":76,
+               "usersCount":41,
+               "tipCount":5
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4bedf0cda40fc92872ca820c",
+            "name":"Santa Monica Pizza",
+            "contact":{
+
+            },
+            "location":{
+               "lat":40.43127989,
+               "lng":-111.82337582,
+               "distance":1984,
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d1ca941735",
+                  "name":"Pizza Place",
+                  "pluralName":"Pizza Places",
+                  "shortName":"Pizza",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/food\/pizza_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":96,
+               "usersCount":61,
+               "tipCount":3
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4c156fc77f7f2d7f8d88e268",
+            "name":"LDS Church Meetinghouse",
+            "contact":{
+
+            },
+            "location":{
+               "address":"650 E 3200 N",
+               "lat":40.42758980589985,
+               "lng":-111.83929681777954,
+               "distance":1650,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d132941735",
+                  "name":"Church",
+                  "pluralName":"Churches",
+                  "shortName":"Church",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/religious_church_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":88,
+               "usersCount":16,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4c8e338558668cfa05dacfec",
+            "name":"Lehi Junior High",
+            "contact":{
+               "phone":"8017687010",
+               "formattedPhone":"(801) 768-7010"
+            },
+            "location":{
+               "address":"700 E Cedar Hollow Rd.",
+               "lat":40.40333331820272,
+               "lng":-111.83764457702637,
+               "distance":1360,
+               "postalCode":"84043-9508",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d13b941735",
+                  "name":"School",
+                  "pluralName":"Schools",
+                  "shortName":"School",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/default_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":58,
+               "usersCount":24,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4ef413a7c5123a724dcb244a",
+            "name":"Scothern's Slippery Slope",
+            "contact":{
+
+            },
+            "location":{
+               "address":"6615 Canterbury Drive",
+               "lat":40.42524,
+               "lng":-111.817089,
+               "distance":1670,
+               "postalCode":"84003",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d1d4941735",
+                  "name":"Speakeasy",
+                  "pluralName":"Speakeasies",
+                  "shortName":"Speakeasy \/ Secret Spot",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/nightlife\/secretbar_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":3,
+               "usersCount":2,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4d63cdfafbc441bd84902541",
+            "name":"Fred Meyer Jewelers",
+            "contact":{
+               "phone":"8013416530",
+               "formattedPhone":"(801) 341-6530",
+               "twitter":"fmjeweler"
+            },
+            "location":{
+               "address":"1550 E 3500 N",
+               "lat":40.42966829318199,
+               "lng":-111.82476997375487,
+               "distance":1778,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d111951735",
+                  "name":"Jewelry Store",
+                  "pluralName":"Jewelry Stores",
+                  "shortName":"Jewelry",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/jewelry_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":true,
+            "stats":{
+               "checkinsCount":12,
+               "usersCount":3,
+               "tipCount":0
+            },
+            "specials":{
+               "count":1,
+               "items":[
+                  {
+                     "id":"4f3c1e5b7716dc2f0ca9293e",
+                     "type":"frequency",
+                     "message":"In celebration of our new bridal catalog we're giving away a diamond ring on our Facebook page. Enter here: http:\/\/bit.ly\/xXkO8j",
+                     "imageUrls":{
+                        "count":0
+                     },
+                     "description":"Unlocked every check-in",
+                     "finePrint":"Contest not available in-store & ONLY valid on Fred Meyer Jewelers Facebook page: facebook.com\/fredmeyerjeweler.Contest ends: 3\/31\/2012.",
+                     "icon":"check-in",
+                     "title":"Check-in Special",
+                     "provider":"foursquare",
+                     "redemption":"standard"
+                  }
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4e49d57bae6014a2fdcb9593",
+            "name":"Infinite Cycles",
+            "contact":{
+               "phone":"8017665167",
+               "formattedPhone":"(801) 766-5167"
+            },
+            "location":{
+               "address":"1678 E Timpanogos Hwy.",
+               "lat":40.4317262505596,
+               "lng":-111.82295842310911,
+               "distance":2043,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d115951735",
+                  "name":"Bike Shop",
+                  "pluralName":"Bike Shops",
+                  "shortName":"Bike shop",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/bikeshop_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":76,
+               "usersCount":11,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4bf19d1524f19c74626ef983",
+            "name":"Alpine Pediatrics",
+            "contact":{
+
+            },
+            "location":{
+               "address":"3231 N 1120 E",
+               "lat":40.429752019389575,
+               "lng":-111.83257100261659,
+               "distance":1725,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d177941735",
+                  "name":"Doctor's Office",
+                  "pluralName":"Doctor's Offices",
+                  "shortName":"Doctor's Office",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/medical_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":26,
+               "usersCount":12,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4d731d1727ddb60c7f81d81b",
+            "name":"Burger King",
+            "contact":{
+               "phone":"8014078061",
+               "formattedPhone":"(801) 407-8061"
+            },
+            "location":{
+               "address":"1466 E 3500 N",
+               "lat":40.43119138747907,
+               "lng":-111.82338058948517,
+               "distance":1975,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d16e941735",
+                  "name":"Fast Food Restaurant",
+                  "pluralName":"Fast Food Restaurants",
+                  "shortName":"Fast Food",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/food\/fastfood_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":101,
+               "usersCount":50,
+               "tipCount":4
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4ba803cbf964a52074c639e3",
+            "name":"UVU Lehi Satellite Facility",
+            "contact":{
+
+            },
+            "location":{
+               "lat":40.40278564427358,
+               "lng":-111.83986048210767,
+               "distance":1504,
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d1a0941735",
+                  "name":"College Classroom",
+                  "pluralName":"College Classrooms",
+                  "shortName":"Classroom",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/education\/default_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":12,
+               "usersCount":8,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4c6de9a510faa1432b80ef68",
+            "name":"Fairbanks Orthodontics",
+            "contact":{
+
+            },
+            "location":{
+               "lat":40.430093,
+               "lng":-111.829677,
+               "distance":1757,
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d178941735",
+                  "name":"Dentist's Office",
+                  "pluralName":"Dentist's Offices",
+                  "shortName":"Dentist's Office",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/medical_dentist_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":14,
+               "usersCount":8,
+               "tipCount":1
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4c49e6236f1420a1b32a3f56",
+            "name":"US Bank",
+            "contact":{
+               "phone":"8017669272",
+               "formattedPhone":"(801) 766-9272"
+            },
+            "location":{
+               "address":"1550 E 3500 N",
+               "lat":40.43012,
+               "lng":-111.825002,
+               "distance":1821,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d10a951735",
+                  "name":"Bank",
+                  "pluralName":"Banks",
+                  "shortName":"Bank \/ Financial",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/shops\/financial_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":true,
+            "stats":{
+               "checkinsCount":34,
+               "usersCount":8,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4c7edddc2042b1f7c44dc1ad",
+            "name":"Summer Crest Park",
+            "contact":{
+
+            },
+            "location":{
+               "address":"1917 N 1150 E",
+               "crossStreet":"1900 north",
+               "lat":40.411747907751746,
+               "lng":-111.83264493942261,
+               "distance":334,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d1e7941735",
+                  "name":"Playground",
+                  "pluralName":"Playgrounds",
+                  "shortName":"Playground",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/parks_outdoors\/playground_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":41,
+               "usersCount":7,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4e9b3068e5fa3f633d79a27b",
+            "name":"LDS Church Meetinghouse",
+            "contact":{
+
+            },
+            "location":{
+               "address":"150 E 1500 N",
+               "lat":40.406658432218954,
+               "lng":-111.84756875038147,
+               "distance":1671,
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d132941735",
+                  "name":"Church",
+                  "pluralName":"Churches",
+                  "shortName":"Church",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/religious_church_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":5,
+               "usersCount":1,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4e7bb7aa2c5bc1b7848a8dec",
+            "name":"Tokyo Electron America",
+            "contact":{
+
+            },
+            "location":{
+               "address":"3300 North Running Creek",
+               "lat":40.42976947505046,
+               "lng":-111.83050991794457,
+               "distance":1719,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d130941735",
+                  "name":"Building",
+                  "pluralName":"Buildings",
+                  "shortName":"Other - Buildings",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/default_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":15,
+               "usersCount":2,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4bc478744cdfc9b657a39821",
+            "name":"Dry Creek Dental",
+            "contact":{
+
+            },
+            "location":{
+               "lat":40.42960741192115,
+               "lng":-111.82967733267053,
+               "distance":1703,
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d178941735",
+                  "name":"Dentist's Office",
+                  "pluralName":"Dentist's Offices",
+                  "shortName":"Dentist's Office",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/medical_dentist_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":11,
+               "usersCount":4,
+               "tipCount":0
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4b7581abf964a52073102ee3",
+            "name":"James E. Talmage Building",
+            "contact":{
+
+            },
+            "location":{
+               "address":"Brigham Young University",
+               "lat":40.249348944142625,
+               "lng":-111.65083408355713,
+               "distance":23874,
+               "postalCode":"84602",
+               "city":"Provo",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d19e941735",
+                  "name":"College Engineering Building",
+                  "pluralName":"College Engineering Buildings",
+                  "shortName":"Engineering",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/education\/default_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":899,
+               "usersCount":129,
+               "tipCount":3
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         },
+         {
+            "id":"4d7c47afd1c28eecd1791274",
+            "name":"LDS Church Meetinghouse",
+            "contact":{
+               "phone":"8017661866",
+               "formattedPhone":"(801) 766-1866",
+               "twitter":"ldschurch"
+            },
+            "location":{
+               "address":"1592 E 900 N",
+               "crossStreet":"btwn 1590 E & 1710 E",
+               "lat":40.39955866540129,
+               "lng":-111.82359516620636,
+               "distance":1747,
+               "postalCode":"84043",
+               "city":"Lehi",
+               "state":"UT",
+               "country":"United States"
+            },
+            "categories":[
+               {
+                  "id":"4bf58dd8d48988d132941735",
+                  "name":"Church",
+                  "pluralName":"Churches",
+                  "shortName":"Church",
+                  "icon":{
+                     "prefix":"https:\/\/foursquare.com\/img\/categories\/building\/religious_church_",
+                     "sizes":[
+                        32,
+                        44,
+                        64,
+                        88,
+                        256
+                     ],
+                     "name":".png"
+                  },
+                  "primary":true
+               }
+            ],
+            "verified":false,
+            "stats":{
+               "checkinsCount":19,
+               "usersCount":10,
+               "tipCount":2
+            },
+            "specials":{
+               "count":0,
+               "items":[
+
+               ]
+            },
+            "hereNow":{
+               "count":0
+            }
+         }
+      ]
+   }
+}

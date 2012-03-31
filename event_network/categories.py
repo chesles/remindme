@@ -1,6 +1,6 @@
+import logging
 import re
 import string
-import httplib
 
 
 regex = re.compile('[%s]' % re.escape(string.punctuation))
@@ -35,21 +35,28 @@ class Category:
 
     @classmethod
     def load_category_aliases(cls):
+        logging.info('Category.load_category_aliases: Opening category alias file "%s"' % 'categories.map')
         file = open('categories.map')
-        for line in file:
-            line = line.strip()
-            if len(line) > 0:
-                parts = line.split(':')
-                if len(parts) == 2  :
-                    category = parts[0]
-                    category = category.strip()
-                    aliases = parts[1].split(',')
-                    #print "%s => %s" % (category, category)
-                    Category.category_map[category] = category
-                    for alias in aliases:
-                        alias = alias.strip()
-                        #print "%s => %s" % (alias, category)
-                        Category.category_map[alias] = category
+        try:
+            for line in file:
+                line = line.strip()
+                if len(line) > 0:
+                    parts = line.split(':')
+                    if len(parts) == 2  :
+                        category = parts[0]
+                        category = category.strip()
+                        aliases = parts[1].split(',')
+                        #print "%s => %s" % (category, category)
+                        logging.debug('Category.load_category_aliases:   Adding category alias mapping "%s" => "%s"' % (category, category))
+                        Category.category_map[category] = category
+                        for alias in aliases:
+                            alias = alias.strip()
+                            #print "%s => %s" % (alias, category)
+                            logging.debug('Category.load_category_aliases:   Adding category alias mapping "%s" => "%s"' % (alias, category))
+                            Category.category_map[alias] = category
+            logging.info('Category.load_category_aliases: Done parsing category alias file')
+        finally:
+            file.close()
 
     @classmethod
     def category_matches_location(cls, category, location):

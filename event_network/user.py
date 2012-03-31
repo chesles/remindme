@@ -54,6 +54,12 @@ class User:
                 return user
         return None
 
+    @classmethod
+    def get_all_users(cls):
+        return_list = []
+        return_list.extend(User.user_list)
+        return return_list
+
     user_count = 0
 
     user_list = []

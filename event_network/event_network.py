@@ -3,14 +3,17 @@
 
 import tornado.ioloop
 import tornado.web
-
+import tornado.options
+import logging
 import json
 import unicodedata
-
 import httplib, urllib
 
-import sms_notification_handler
 
+tornado.options.parse_command_line()
+
+
+import sms_notification_handler
 from user import *
 from reminder import *
 
@@ -21,13 +24,20 @@ def ascii(us):
 class EventHandler(tornado.web.RequestHandler):
     def post(self, domain, name):
         self.set_header("Content-Type", "text/plain")
-        self.write('got event %s:%s\n' % (domain,name))
-        print 'got event %s:%s\n' % (domain,name)
+        self.write('OK\n')
+
+        logging.info('EventHandler.post: ===============')  
+        logging.info('EventHandler.post: Got event %s:%s' % (domain,name))
+
         if not self.request.arguments.has_key('from_test_page'):
             self.finish()  # If this event was not received from the test page, call finish here to respond back to the client.  This makes the event processsing asynchronous.
-        self.fired(self.request.arguments)
-        if self.request.arguments.has_key('from_test_page'):
-            self.redirect("/")
+
+        try:
+            self.fired(self.request.arguments)
+        finally:
+            if self.request.arguments.has_key('from_test_page'):
+                self.redirect("/")  # If this came from the test page, redirect back to the test page
+            logging.info('EventHandler.post: ---------------')
 
 
 class UnknownEventHandler(EventHandler):
@@ -39,14 +49,15 @@ class NewRemniderSentHandler(EventHandler):
     def fired(self, attributes):
         user_name = attributes['user_name'][0]
 
-        print 'Looking for user %s' % user_name
+        logging.info('NewRemniderSentHandler.post: Looking for user %s' % user_name)
         user = User.get_by_user_name(user_name)
         if not user:
-            print 'Error: Unknown user_name "%s"' % user_name
-        print 'Found user "%s"' % user_name
+            logging.error('NewRemniderSentHandler.post: Unknown user_name "%s"' % user_name)
+        logging.info('NewRemniderSentHandler.post: Found user "%s"' % user_name)
 
         reminder = Reminder.parse(attributes['reminder_text'][0])
 
+        logging.info('Adding reminder "%s" @ "%s" to user %s' % (reminder.item(), reminder.location(), user.user_name()))
         user.add_reminder(reminder)
 
 
@@ -54,33 +65,43 @@ class UserCheckedInHandler(EventHandler):
     def fired(self, attributes):
         user_name = attributes['user_name'][0]
 
-        print 'Looking for user %s' % user_name
+        logging.info('UserCheckedInHandler.fired: Looking for user %s' % user_name)
         user = User.get_by_user_name(user_name)
         if not user:
-            print 'Error: Unknown user_name "%s"' % user_name
-        print 'Found user "%s"' % user_name
+            logging.error('UserCheckedInHandler.fired: Unknown user_name "%s"' % user_name)
+        logging.info('UserCheckedInHandler.fired: Found user "%s"' % user_name)
 
         venue_str = attributes['venue'][0]
         venue = json.loads(venue_str)
 
         # Build a list of reminders that apply to this location
+        logging.info('UserCheckedInHandler.fired: Looking for reminders for user %s that apply to venue "%s"' % (user.user_name(), venue['name']))
         reminder_list = []
         reminders = user.reminders()
         for reminder in reminders:
-            if reminder.is_active() and reminder.venue_appies_to_reminider(venue):
+            logging.debug('UserCheckedInHandler.fired:   Examining reminder "%s" @ "%s"' % (reminder.item(), reminder.location()))
+            if not reminder.is_active():
+                logging.debug('UserCheckedInHandler.fired:     Skipping reminder "%s" @ "%s" because it is not active' % (reminder.item(), reminder.location()))
+                continue
+            if reminder.venue_appies_to_reminider(venue):
+                logging.debug('UserCheckedInHandler.fired:     Reminder "%s" @ "%s" applies to venue "%s"' % (reminder.item(), reminder.location(), venue['name']))
                 reminder_list.append(reminder.item())
                 reminder.inactivate()
+            else:
+                logging.debug('UserCheckedInHandler.fired:     Reminder "%s" @ "%s" does not apply to venue "%s"' % (reminder.item(), reminder.location(), venue['name']))
 
         # Raise the ReminderListAvailableHandler event which will notify the user.
         if len(reminder_list) == 0:
-            print 'No reminders apply to venue "%s"' % venue['name']
+            logging.info('UserCheckedInHandler.fired: No reminders apply to venue "%s" not sending user a reminder notification' % venue['name'])
+            return
         else:
-            print 'The following reminders apply to venue "%s":' % venue['name']
+            logging.info('UserCheckedInHandler.fired: Reminders were found that apply to venue "%s":' % venue['name'])
+            logging.debug('UserCheckedInHandler.fired: The following reminders apply to venue "%s":' % venue['name'])
             for reminder in reminder_list:
-                print '  %s' % reminder
+                logging.debug('UserCheckedInHandler.fired:   %s' % reminder)
 
         event_map = {"_domain" : "reminder", "_name" : "list_available", "user_name" : user_name, "venue_name" : venue['name'], "reminder_list" : json.dumps(reminder_list)}
-        print 'Sending "reminder:list_available" event with attributes "%s"' % json.dumps(event_map)
+        logging.info('UserCheckedInHandler.fired: Sending "reminder:list_available" event with attributes "%s"' % json.dumps(event_map))
 
         # Send the post
         params = urllib.urlencode(event_map)
@@ -88,21 +109,21 @@ class UserCheckedInHandler(EventHandler):
                    "Accept": "text/plain"}
         connection = httplib.HTTPConnection("localhost", 8080)
         connection.request("POST", "/event/reminder/list_available", params, headers)
-        print 'Sent reminder:list_available event'
+        logging.info('UserCheckedInHandler.fired: Sent reminder:list_available event')
 
 
 class ReminderListAvailableHandler(EventHandler):
     def fired(self, attributes):
-        print 'Retrieving event attributes'
+        logging.info('ReminderListAvailableHandler.fired: Retrieving event attributes')
 
         user_name = attributes['user_name'][0]
-        print 'user_name: %s' % user_name
+        logging.info('ReminderListAvailableHandler.fired: user_name: %s' % user_name)
 
         venue_name = attributes['venue_name'][0]
-        print 'venue_name: "%s"' % venue_name
+        logging.info('ReminderListAvailableHandler.fired: venue_name: "%s"' % venue_name)
 
         reminder_list_str = attributes['reminder_list'][0]
-        print 'reminder_list: %s' % reminder_list_str
+        logging.info('ReminderListAvailableHandler.fired: reminder_list: %s' % reminder_list_str)
         reminder_list = json.loads(reminder_list_str)
 
         # Generate the message to send to the user.
@@ -114,7 +135,7 @@ class ReminderListAvailableHandler(EventHandler):
             else:
                 message = message + ','
 
-        print 'Sending message to user: "%s"' % message
+        logging.info('ReminderListAvailableHandler.fired: Sending message to user %s: "%s"' % (message, user_name))
 
         # Send the messge to the user.
         sms_notification_handler.notify_user(user_name, message)
@@ -124,18 +145,21 @@ class ReminderListAvailableHandler(EventHandler):
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
         user = User.get_by_user_name('jrl')
-        self.render("index.html", reminders=user.reminders())
+        self.render("index.html", users=User.get_all_users())
 
-application = tornado.web.Application([
-    (r"/", IndexHandler),
-    (r"/event/(user)/(checked_in)", UserCheckedInHandler),
-    (r"/event/(user)/(new_reminder)", NewRemniderSentHandler),
-    (r"/event/(reminder)/(list_available)", ReminderListAvailableHandler),
-    (r"/event/(\w+)/(\w+)", UnknownEventHandler),
-])
+def main():
+    logging.info("main: starting torando web server")
 
+    application = tornado.web.Application([
+        (r"/", IndexHandler),
+        (r"/event/(user)/(checked_in)", UserCheckedInHandler),
+        (r"/event/(user)/(new_reminder)", NewRemniderSentHandler),
+        (r"/event/(reminder)/(list_available)", ReminderListAvailableHandler),
+        (r"/event/(\w+)/(\w+)", UnknownEventHandler),
+    ])
 
-if __name__ == "__main__":
     application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()
 
+if __name__ == "__main__":
+    main()

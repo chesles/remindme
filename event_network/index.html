@@ -83,11 +83,32 @@
                 <td valign="top">
                     <fieldset>
                         <legend>Reminders</legend>
-                        <ul>
-                        {% for reminder in reminders %}
-                            <li>{{ reminder.item() }} @ {{ reminder.location() }}</li>                    
-                        {% end %}
-                        </ul>
+                        <table>
+                            <tr>
+                                <th>User</th>
+                                <th>Reminder</th>
+                                <th>Location</th>
+                                <th>Active</th>
+                            </tr>
+                            {% for user in users %}
+                                {% for reminder in user.reminders() %}
+                                    <tr>
+                                        <td>
+                                            {{ user.user_name() }}
+                                        </td>
+                                        <td>
+                                            {{ reminder.item() }}
+                                        </td>
+                                        <td>
+                                            {{ reminder.location() }}                    
+                                        </td>
+                                        <td>
+                                            {{ 'Yes' if reminder.is_active() else 'No' }}
+                                        </td>
+                                    </tr>
+                                {% end %}
+                            {% end %}
+                        </table>
                     </fieldset>
                 </td>
             </tr>
