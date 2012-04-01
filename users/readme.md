@@ -45,3 +45,18 @@ I haven't tested, but it should work the same to POST or PUT json data to these 
 # integrating with backbone.js
 
 This should integrate directly with backbone.js. Set your model's `_idAttribute` to "username", as dealing with mongo's `_id` objects isn't implemented here.
+
+# reminders
+
+You can get a list of reminders for a user, add a reminder to the database, or make changes to a reminder in a similar manner:
+
+    # get a user's reminders:
+    curl localhost:8082/bob/reminders
+
+    # add a reminder, with two fields: text and location
+    # note that the schema is flexible and you can specify any field name/value
+    # the server automatically assigns an id in the _id field
+    curl localhost:8082/bob/reminders -d text=remindertext -d location=somelocation
+
+    # update a reminder:
+    curl localhost:8082/bob/reminders/[reminder's _id field] -X PUT text=updatedtext
