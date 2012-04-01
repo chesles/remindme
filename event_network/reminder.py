@@ -61,16 +61,20 @@ class Reminder:
     def category_applies_to_location(self, category):
         return Category.category_matches_location(category, self._location)
 
-    def assign_to_user(self, user_id):
-        if not reminders.has_key(user_id):
-            reminders[user_id] = []
-        reminders[user_id].append(self)
+    def assign_to_user(self, user_name):
+        if not reminders.has_key(user_name):
+            reminders[user_name] = []
+        reminders[user_name].append(self)
 
 
-reminders = {1 : [Reminder('Get door pulls for pantry', 'Home improvement store')]}
+    @classmethod
+    def get_reminders_for_user(cls, user_name):
+        if reminders.has_key(user_name):
+            return reminders[user_name]
+        return []    
+
+reminders = {'jrl' : [Reminder('get pulls for pantry door', 'a home improvement store')],
+             'bob' : [Reminder('get eggs', 'smiths')]}
 
 
-def get_reminders_for_user(user_id):
-    if reminders.has_key(user_id):
-        return reminders[user_id]
-    return []
+

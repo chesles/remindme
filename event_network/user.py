@@ -1,29 +1,17 @@
 from reminder import *
+import requests
+import json
 
 
 class User:
 
-    def __init__(self, user_name, first_name, last_name, fsqr_id, phone_number, email):
-        User.user_count = User.user_count + 1
-        self._user_id = User.user_count
+    def __init__(self, user_name, fsqr_id, phone_number):
         self._user_name = user_name
-        self._first_name = first_name
-        self._last_name = last_name
         self._fsqr_id = fsqr_id
         self._phone_number = phone_number
-        self._email = email
-
-    def user_id(self):
-        return self._user_id
 
     def user_name(self):
         return self._user_name
-
-    def first_name(self):
-        return self._first_name
-
-    def last_name(self):
-        return self._last_name
 
     def fsqr_id(self):
         return self._fsqr_id
@@ -31,41 +19,26 @@ class User:
     def phone_number(self):
         return self._phone_number
 
-    def email(self):
-        return self._email
-
     def reminders(self):
-        return get_reminders_for_user(self._user_id)
+        return Reminder.get_reminders_for_user(self._user_name)
 
     def add_reminder(self, reminder):
-        reminder.assign_to_user(self._user_id)
-
-    @classmethod
-    def get_by_id(cls,user_id):
-        for user in User.user_list:
-            if user.user_id() == user_id:
-                return user
-        return None
+        reminder.assign_to_user(self._user_name)
 
     @classmethod
     def get_by_user_name(cls,user_name):
-        for user in User.user_list:
-            if user.user_name() == user_name:
-                return user
-        return None
+        response = requests.get("http://localhost:8082/%s" % user_name)
+        user_list = json.loads(response.text)
+        if len(user_list) == 0:
+            return None
+
+        user = user_list[0]
+        return User(user['username'], user['fsqid'], user['phone'])
 
     @classmethod
     def get_all_users(cls):
-        return_list = []
-        return_list.extend(User.user_list)
-        return return_list
-
-    user_count = 0
-
-    user_list = []
-
-
-User.user_list.append(User('jrl', 'Jonatha', 'Ludwig', '20298748', '8016109129', 'jr.ludwig@gmail.com'))
-
+        response = requests.get("http://localhost:8082/")
+        user_list = json.loads(response.text)
+        return [User(user['username'], user['fsqid'], user['phone']) for user in user_list]
 
 
