@@ -5,11 +5,12 @@ var Step = require("step"),
     client = new mongo.Db(conf.mongo.database,
         new mongo.Server(conf.mongo.host, conf.mongo.port, conf.mongo.options));
 
-exports.open = function(callback) {
+module.exports.mongo = mongo;
+module.exports.open = function(callback) {
     client.open(callback);
 };
 
-exports.close = function() {
+module.exports.close = function() {
     client.close();
 };
 
@@ -132,5 +133,98 @@ User.prototype.insert = function(callback) {
             callback.apply(null, arguments);
         }
     );
+};
 
+/*
+ * TODO: Reminder model code is an exact replica of User model code, replacing
+ * User.collection with Reminder.collection where needed. This can and should be
+ * factored out before too long
+ */
+var Reminder = module.exports.Reminder = function(attributes) {
+    this.attributes = attributes || {};
+    this.changes = {};
+};
+
+Reminder.collection = "reminders";
+
+Reminder.find = function(filter, options, callback) {
+    Step(
+        function() {
+            client.collection(Reminder.collection, this);
+        },
+        function(err, collection) {
+            if (err) return callback.call(null, err);
+            collection.find(filter, options, this);
+        },
+        function(err, cursor) {
+            if (err) return callback.call(null, err);
+            cursor.toArray(this);
+        },
+        function(err, arr) {
+            if (err) return callback.call(null, err);
+            var reminders = _.map(arr, function(data) {
+                    var r = new Reminder(data);
+                    r._saved = true; // tells save() to findandmodify instead of insert
+                    return r;
+                });
+            callback.apply(null, [err, reminders]);
+        }
+    );
+};
+
+/*
+ * find the first reminder matching filter, if any
+ *
+ * callback gets called with a Reminder object as the second parameter
+ * or with an error as the first parameter
+ */
+Reminder.findOne = function(filter, options, callback) {
+    options = options || {};
+    options.limit = 1;
+
+    Reminder.find(filter, options, function(err, reminders) {
+        if (err) return callback.call(null, err);
+        reminder = reminders || [];
+        if (reminders.length < 1) return callback.call(null, null, null);
+        else callback.call(null, null, reminders[0]);
+    });
+};
+
+Reminder.prototype.set = User.prototype.set;
+Reminder.prototype.get = User.prototype.get;
+Reminder.prototype.toJSON = User.prototype.toJSON;
+Reminder.prototype.save = User.prototype.save;
+
+Reminder.prototype.update = function(callback) {
+    var self = this;
+    Step(
+        function() {
+            client.collection(Reminder.collection, this);
+        },
+        function(err, collection) {
+            if (err) return callback.call(null, err);
+            collection.update({_id: self.get('_id')}, {$set: self.changes}, {safe:true}, this);
+        },
+        function(err, result) {
+            if (err) callback.call(null, err);
+            else if (result) callback.call(null, null, self.changes);
+            else callback.call(null, 'Update failed');
+        }
+    );
+};
+
+Reminder.prototype.insert = function(callback) {
+    var self = this;
+    Step(
+        function() {
+            client.collection(Reminder.collection, this);
+        },
+        function(err, collection) {
+            if (err) return callback.call(null, err);
+            collection.insert(self.attributes, {safe:true}, this);
+        },
+        function(err, result) {
+            callback.apply(null, arguments);
+        }
+    );
 };

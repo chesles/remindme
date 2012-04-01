@@ -83,9 +83,84 @@ UserRestHandler = rsnbl.RequestHandler.extend({
     }
 });
 
+var ReminderRestHandler = rsnbl.RequestHandler.extend({
+    helpers: [connect.bodyParser(), connect.query()],
+    get: function(username) {
+        var self = this,
+            search = {username: username};
+        console.log("Searching reminders for", username);
+        db.User.findOne(search, {}, function(err, user) {
+            if (user) {
+                reminderSearch = {user: user.get('username')};
+                console.log(user, reminderSearch);
+                db.Reminder.find(reminderSearch, {}, function(err, reminders) {
+                    var code = 200, response;
+                    if (err) response = JSON.stringify({error: err});
+                    else response = JSON.stringify(reminders);
+                    self.response.writeHead(code, {
+                        'Content-Type': 'application/json'
+                    });
+                    self.response.end(response);
+                });
+            } else {
+                this.notfound();
+            }
+        });
+    },
+
+    post: function(username) {
+        var self = this,
+            data = this.request.body;
+        data.user = username;
+        var reminder = new db.Reminder(data);
+        reminder.save(function(err, saved) {
+            var code = 200, response;
+            if (err) {
+                code = 500;
+                response = JSON.stringify({error: err});
+            }
+            else {
+                response = JSON.stringify(saved);
+            }
+            self.response.writeHead(code, {
+                "Content-Type": "application/json"
+            });
+            self.response.end(response);
+        });
+    },
+
+    put: function(username, reminderid) {
+        var self = this,
+            id = db.mongo.ObjectID.createFromHexString(reminderid);
+        db.Reminder.findOne(id, {}, function(err, reminder) {
+            var end = function(err, results) {
+                var code = 200, response;
+                if (err) {
+                    code = 500;
+                    response = JSON.stringify({error: err});
+                }
+                else {
+                    response = JSON.stringify(results);
+                }
+                self.response.writeHead(code, {
+                    "Content-Type": "application/json"
+                });
+                self.response.end(response);
+            };
+
+            if (err || !reminder) return end(err || "Reminder not found");
+            for (var k in self.request.body) {
+                reminder.set(k, self.request.body[k]);
+            }
+            reminder.save(end);
+        });
+    }
+});
+
 UserService = new rsnbl.Application([
-        [/\/([a-z0-9]*)/i, UserRestHandler]
-    ]);
+    [/^\/([a-z0-9]*)$/i, UserRestHandler],
+    [/^\/([a-z0-9]+)\/reminders\/?([a-z0-9]+)?/i, ReminderRestHandler]
+]);
 
 db.open(function() {
     UserService.listen(settings.users.port, function() {
