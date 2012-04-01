@@ -78,10 +78,11 @@ User.findOne = function(filter, options, callback) {
 User.prototype.set = function(key, val) {
     // keep track of changes for when we do an update()
     if (this.attributes.hasOwnProperty(key)) {
-        if (this.attributes[key] !== val)
+        if (this.attributes[key] !== val && key !== '_id') {
             this.changes[key] = val;
+            this.attributes[key] = val;
+        }
     }
-    this.attributes[key] = val;
 };
 
 User.prototype.get = function(key) {

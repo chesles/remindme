@@ -14,7 +14,6 @@ UserRestHandler = rsnbl.RequestHandler.extend({
         var search = self.request.query || {};
         if (user) search.username = user;
 
-        console.log(search);
         db.User.find(search, {}, function(err, users) {
             var code = 200;
             var response;
@@ -33,7 +32,6 @@ UserRestHandler = rsnbl.RequestHandler.extend({
     post: function() {
         var self = this;
         var user = new db.User(this.request.body);
-        console.log("creating user:", user);
         user.save(function(err, saved) {
             var code = 200, response;
             if (err) {
@@ -55,9 +53,7 @@ UserRestHandler = rsnbl.RequestHandler.extend({
     put: function(user) {
         var self = this,
             search = {username: user};
-        console.log("PUTting", search);
         db.User.findOne(search, {}, function(err, user) {
-            console.log("Found user:", arguments);
             var end = function(err, results) {
                 var code = 200, response;
                 if (err) {
@@ -77,7 +73,6 @@ UserRestHandler = rsnbl.RequestHandler.extend({
             for (var k in self.request.body) {
                 user.set(k, self.request.body[k]);
             }
-            console.log("Updated:", user);
             user.save(end);
         });
     }
@@ -88,11 +83,9 @@ var ReminderRestHandler = rsnbl.RequestHandler.extend({
     get: function(username) {
         var self = this,
             search = {username: username};
-        console.log("Searching reminders for", username);
         db.User.findOne(search, {}, function(err, user) {
             if (user) {
                 reminderSearch = {user: user.get('username')};
-                console.log(user, reminderSearch);
                 db.Reminder.find(reminderSearch, {}, function(err, reminders) {
                     var code = 200, response;
                     if (err) response = JSON.stringify({error: err});
@@ -159,7 +152,7 @@ var ReminderRestHandler = rsnbl.RequestHandler.extend({
 
 UserService = new rsnbl.Application([
     [/^\/([a-z0-9]*)$/i, UserRestHandler],
-    [/^\/([a-z0-9]+)\/reminders\/?([a-z0-9]+)?/i, ReminderRestHandler]
+    [/^\/([a-z0-9]+)\/reminders\/?([a-f0-9]+)?/i, ReminderRestHandler]
 ]);
 
 db.open(function() {
