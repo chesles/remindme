@@ -151,7 +151,7 @@ var ReminderRestHandler = rsnbl.RequestHandler.extend({
 });
 
 UserService = new rsnbl.Application([
-    [/^\/([a-z0-9]*)$/i, UserRestHandler],
+    [/^\/([a-z0-9]*)/i, UserRestHandler],
     [/^\/([a-z0-9]+)\/reminders\/?([a-f0-9]+)?/i, ReminderRestHandler]
 ]);
 

@@ -15,7 +15,7 @@ class ExternalEventHandler(tornado.web.RequestHandler):
         else:
             return None
 
-    def send_event(**event):
+    def send_event(self, **event):
         url = "http://" + settings.eventnetwork['host'] + ":" + str(settings.eventnetwork['port']) + "/event/"
         url += event['domain'] + '/'
         url += event['name']
@@ -56,7 +56,7 @@ class TwilioHandler(ExternalEventHandler):
             print "No user found"
         else:
             self.send_event(domain="user", name="new_reminder",
-                    user_name=user.username, reminder_text=self.get_argument("Body"))
+                    user_name=user['username'], reminder_text=self.get_argument("Body"))
             
 
 

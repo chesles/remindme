@@ -1,4 +1,6 @@
 from categories import *
+import requests
+import json
 
 
 class Reminder:
