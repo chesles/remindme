@@ -2,11 +2,12 @@ import tornado.web
 import requests
 from conf import settings
 import json
+import logging
 
 class ExternalEventHandler(tornado.web.RequestHandler):
     # implement common functionality here: a generic getuser method, perhaps?
     def getuser(self, **kwargs):
-        url = "http://" + settings.users.host + ":" + settings.users.port + "/"
+        url = "http://" + settings.users['host'] + ":" + str(settings.users['port']) + "/"
         users_json = requests.get(url, params=kwargs)
         users = json.loads(users_json.text)
         if len(users) > 0:
@@ -15,7 +16,7 @@ class ExternalEventHandler(tornado.web.RequestHandler):
             return None
 
     def send_event(**event):
-        url = "http://" + settings.eventnetwork.host + ":" + settings.eventnetwork.port + "/event/"
+        url = "http://" + settings.eventnetwork['host'] + ":" + str(settings.eventnetwork['port']) + "/event/"
         url += event['domain'] + '/'
         url += event['name']
         del event['domain'], event['name']
@@ -46,6 +47,7 @@ Data sent from Twilio looks like this:
 """
 class TwilioHandler(ExternalEventHandler):
     def post(self):
+        logging.info('TwilioHandler.post: Post arguments = "%s"' % self.request.arguments)
         # TODO: package data into an internal event and forward it
         # print self.request.body
         print "Getting user: " + self.get_argument("From")
@@ -127,7 +129,9 @@ Data sent by Foursquare looks like this:
 """
 class FoursquareHandler(ExternalEventHandler):
     def post(self):
+        logging.info('Post arguments = "%s"' % self.request.arguments)
         if 'checkin' in self.request.arguments:
+            logging.info('Getting JSON from Foursquare post')
             checkin = json.loads(self.get_argument('checkin'))
             fsqu = checkin['user']
             venue = checkin['venue']
@@ -141,3 +145,90 @@ class FoursquareHandler(ExternalEventHandler):
 
         else:
             pass
+
+
+class TwilioCallHandler(tornado.web.RequestHandler):
+    def handle_call(self):
+        print 'Got incomming call from %s' % self.request.arguments['From'][0]
+        self.set_header("Content-Type", "text/xml")
+        self.set_header("Cache-Control", "no-store")
+        self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
+        self.write(
+        '<Response>'
+            '<Say>Hello caller.</Say>'
+            '<Gather numDigits="1" action="/twilio/call/new_reminder" method="POST">'
+                '<Say>To enter a new reminder, press 1.</Say>'
+            '</Gather>'
+        '</Response>')
+
+    def post(self):
+        self.handle_call()
+    
+    def get(self):
+        self.handle_call()
+
+
+class TwilioCallNewReminderHandler(tornado.web.RequestHandler):
+    def handle_call(self):
+        print 'Getting reminder text'
+        self.set_header("Content-Type", "text/xml")
+        self.set_header("Cache-Control", "no-store")
+        self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
+        self.write("""
+                    <Response>
+                        <Say>After the beep, please say the reminder. Press the pound key when finished.</Say>
+                        <Record transcribe="true" transcribeCallback="/twilio/call/new_reminder/reminder_recorded" finishOnKey="#" playBeep="true" maxLength="30" method="POST"/>
+                        <Say>Sorry, I did not understand. Try again.</Say>
+                    </Response>
+                   """)
+
+    def post(self):
+        self.handle_call()
+
+    def get(self):
+        self.handle_call()
+
+
+class TwilioCallNewReminderGotReminderHandler(tornado.web.RequestHandler):
+    def handle_call(self):
+        print 'Got reminder text %s' % self.request.arguments['TranscriptionText'][0]
+        print 'Getting reminder venue'
+        self.set_header("Content-Type", "text/xml")
+        self.set_header("Cache-Control", "no-store")
+        self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
+        self.write("""
+                    <Response>
+                        <Say>After the beep, please say the name of a specifc venue or the type of venue this reminder applies to. Press the pound key when finished.</Say>
+                        <Record transcribe="true" transcribeCallback="/twilio/call/get_venue/venue_recorded" finishOnKey="#" playBeep="true" maxLength="30" method="POST"/>
+                    </Response>
+                   """)
+        self.write('Sent response to get venue text')
+
+    def post(self):
+        self.handle_call()
+
+    def get(self):
+        self.handle_call()
+
+class TwilioCallNewReminderGotVenueHandler(tornado.web.RequestHandler):
+    def handle_call(self):
+        print 'Got venue %s' % self.request.arguments['TranscriptionText'][0]
+        print 'Finished recording reminder'
+        self.set_header("Content-Type", "text/xml")
+        self.set_header("Cache-Control", "no-store")
+        self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
+        self.write("""
+                    <Response>
+                        <Say>Thank you.</Say>
+                    </Response>
+                   """)
+
+    def post(self):
+        self.handle_call()
+
+    def get(self):
+        self.handle_call()
+
+class RootHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write('Hello')
