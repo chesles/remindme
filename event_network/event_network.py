@@ -29,14 +29,14 @@ class EventHandler(tornado.web.RequestHandler):
         logging.info('EventHandler.post: ===============')  
         logging.info('EventHandler.post: Got event %s:%s' % (domain,name))
 
-        if not self.request.arguments.has_key('from_test_page'):
-            self.finish()  # If this event was not received from the test page, call finish here to respond back to the client.  This makes the event processsing asynchronous.
+        #if not self.request.arguments.has_key('from_test_page'):
+        #    self.finish()  # If this event was not received from the test page, call finish here to respond back to the client.  This makes the event processsing asynchronous.
 
         try:
             self.fired(self.request.arguments)
         finally:
-            if self.request.arguments.has_key('from_test_page'):
-                self.redirect("/")  # If this came from the test page, redirect back to the test page
+            #if self.request.arguments.has_key('from_test_page'):
+            #    self.redirect("/")  # If this came from the test page, redirect back to the test page
             logging.info('EventHandler.post: ---------------')
 
 
