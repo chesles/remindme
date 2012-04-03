@@ -141,7 +141,7 @@ class FoursquareHandler(ExternalEventHandler):
                 pass
             else:
                 self.send_event(domain = 'user', name = 'checked_in',
-                        user_name = user.username, venue = json.dumps(venue))
+                        user_name = user['username'], venue = json.dumps(venue))
 
         else:
             pass

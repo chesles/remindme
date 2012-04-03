@@ -53,6 +53,7 @@ UserRestHandler = rsnbl.RequestHandler.extend({
     put: function(user) {
         var self = this,
             search = {username: user};
+        console.log("Looking up user:", search);
         db.User.findOne(search, {}, function(err, user) {
             var end = function(err, results) {
                 var code = 200, response;
@@ -151,8 +152,8 @@ var ReminderRestHandler = rsnbl.RequestHandler.extend({
 });
 
 UserService = new rsnbl.Application([
-    [/^\/([a-z0-9]*)/i, UserRestHandler],
-    [/^\/([a-z0-9]+)\/reminders\/?([a-f0-9]+)?/i, ReminderRestHandler]
+    [/^\/([a-z0-9]+)\/reminders\/?([a-f0-9]+)?/i, ReminderRestHandler],
+    [/^\/([a-z0-9]*)/i, UserRestHandler]
 ]);
 
 db.open(function() {
