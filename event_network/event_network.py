@@ -4,7 +4,7 @@
 import tornado.ioloop
 import tornado.web
 import tornado.options
-import tornado.httpclient
+from tornado import httpclient
 import logging
 import json
 import unicodedata
@@ -105,21 +105,13 @@ class UserCheckedInHandler(EventHandler):
         logging.info('UserCheckedInHandler.fired: Sending "reminder:list_available" event with attributes "%s"' % json.dumps(event_map))
 
         # Send the post
-
         http_client = httpclient.AsyncHTTPClient()
         http_client.fetch("http://localhost:8080/event/reminder/list_available",
                           lambda response: logging.info(response.body),
                           method="POST",
-                          body=json.dumps(event_map),
-                          headers={"Content-Type" : "application/json"})
+                          body=urllib.urlencode(event_map),
+                          headers={"Content-Type" : "application/x-www-form-urlencoded"})
 
-        #requests.post('http://localhost:8080/event/reminder/list_available', data=event_map)
-        #params = urllib.urlencode(event_map)
-        #headers = {"Content-type": "application/x-www-form-urlencoded",
-        #           "Accept": "text/plain"}
-        #connection = httplib.HTTPConnection("localhost", 8080)
-        #connection.request("POST", "/event/reminder/list_available", params, headers)
-        #connection.getresponse()
         logging.info('UserCheckedInHandler.fired: Sent reminder:list_available event')
 
 
