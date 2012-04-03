@@ -172,7 +172,6 @@ class TwilioCallGetReminderHandler(tornado.web.RequestHandler):
     def handle_call(self):
         print 'Getting reminder text'
         self.set_header("Content-Type", "text/xml")
-        self.set_header("Cache-Control", "no-store")
         self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
         self.write("""
                     <Response>
@@ -180,7 +179,7 @@ class TwilioCallGetReminderHandler(tornado.web.RequestHandler):
                         <Record transcribe="true" transcribeCallback="/twilio/call/get_reminder/reminder_recorded" finishOnKey="#" playBeep="true" maxLength="30" action="/twilio/call/get_venue" method="POST"/>
                     </Response>
                    """)
-        self.write('Sent response to get reminder text')
+        logging.info('Sent response to get reminder text')
 
     def post(self):
         self.handle_call()
@@ -193,7 +192,6 @@ class TwilioCallGetVenueHandler(tornado.web.RequestHandler):
     def handle_call(self):
         print 'Getting reminder venue'
         self.set_header("Content-Type", "text/xml")
-        self.set_header("Cache-Control", "no-store")
         self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
         self.write("""
                     <Response>
@@ -201,7 +199,7 @@ class TwilioCallGetVenueHandler(tornado.web.RequestHandler):
                         <Record transcribe="true" transcribeCallback="/twilio/call/get_venue/venue_recorded" finishOnKey="#" playBeep="true" maxLength="30" method="POST"/>
                     </Response>
                    """)
-        self.write('Sent response to get venue text')
+        logging.info('Sent response to get venue text')
 
     def post(self):
         self.handle_call()
