@@ -20,10 +20,13 @@ class User:
         return self._phone_number
 
     def reminders(self):
-        return Reminder.get_reminders_for_user(self._user_name)
+        response = requests.get("http://localhost:8082/%s/reminders" % self._user_name)
+        reminder_list = json.loads(response.text)
+        return [Reminder(reminder['_id'], self._user_name, reminder['text'], reminder['location'], False if reminder['active'] == "0" else True) for reminder in reminder_list]
 
     def add_reminder(self, reminder):
-        reminder.assign_to_user(self._user_name)
+        reminder_map = {"text" : reminder.item(), "location" : reminder.location(), "active" : 1 if reminder.is_active() else 0}
+        requests.post('http://localhost:8082/%s/reminders' % self._user_name, data=reminder_map)
 
     @classmethod
     def get_by_user_name(cls,user_name):

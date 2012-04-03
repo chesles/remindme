@@ -5,8 +5,6 @@ import json
 
 class Reminder:
 
-    reminder_count = 0
-
     @classmethod
     def parse(cls, text):
         parts = text.split('@')
@@ -14,17 +12,14 @@ class Reminder:
             raise Exception('Invalid reminder syntax "%s"' % text)
         item = parts[0].strip()
         location = parts[1].strip()
-        return Reminder(item, location)
+        return Reminder(None, None, item, location, True)
 
-    def __init__ (self, item, location):
-        Reminder.reminder_count = Reminder.reminder_count + 1
-        self._reminder_id = Reminder.reminder_count
+    def __init__ (self, reminder_id, user_name, item, location, active):
+        self._reminder_id = reminder_id
+        self._user_name = user_name
         self._item = item
         self._location = location
-        self._active = True
-
-    def reminder_id(self):
-        return self._reminder_id
+        self._active = active
 
     def item(self):
         return self._item
@@ -32,16 +27,18 @@ class Reminder:
     def location(self):
         return self._location
 
-    def applies_to(self, location):
-        return True
-
     def is_active(self):
         return self._active
 
     def activate(self):
+        reminder_map = {"active" : 1}
+        requests.put('http://localhost:8082/%s/reminders/%s' % (self._user_name, self._reminder_id), data=reminder_map)
         self._active = True
 
     def inactivate(self):
+        logging.info('Inactivating reminder %s for user %s' % (self._reminder_id, self._user_name))
+        reminder_map = {"active" : 0}
+        requests.put('http://localhost:8082/%s/reminders/%s' % (self._user_name, self._reminder_id), data=reminder_map)
         self._active = False
 
     def venue_appies_to_reminider(self, venue):
@@ -67,16 +64,6 @@ class Reminder:
         if not reminders.has_key(user_name):
             reminders[user_name] = []
         reminders[user_name].append(self)
-
-
-    @classmethod
-    def get_reminders_for_user(cls, user_name):
-        if reminders.has_key(user_name):
-            return reminders[user_name]
-        return []    
-
-reminders = {'jrl' : [Reminder('get pulls for pantry door', 'a home improvement store')],
-             'bob' : [Reminder('get eggs', 'smiths')]}
 
 
 
