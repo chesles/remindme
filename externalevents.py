@@ -35,7 +35,7 @@ application = tornado.web.Application([
 
 def main():
     logging.info('Starting External Events server')
-    application.listen(443, ssl_options = settings.ssl_options)
+    application.listen(8083, ssl_options = settings.ssl_options)
     tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == '__main__':

@@ -171,6 +171,7 @@ class TwilioCallHandler(tornado.web.RequestHandler):
 class TwilioCallGetReminderHandler(tornado.web.RequestHandler):
     def post(self):
         logging.info('Getting reminder text')
+        logging.info('POST parameters: %s' % json.dumps(self.request.arguments))
         self.set_header("Content-Type", "text/xml")
         self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
         self.write("""
@@ -185,11 +186,12 @@ class TwilioCallGetReminderHandler(tornado.web.RequestHandler):
 class TwilioCallGetVenueHandler(tornado.web.RequestHandler):
     def post(self):
         logging.info('Getting reminder venue')
+        logging.info('POST parameters: %s' % json.dumps(self.request.arguments))
         self.set_header("Content-Type", "text/xml")
         self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
         self.write("""
                     <Response>
-                        <Say>After the beep, please say the name of a specifc venue or the type of venue this reminder applies to. Press the pound key when finished.</Say>
+                        <Say>After the beep, please say the reminder location. Press the pound key when finished.</Say>
                         <Record transcribe="true" transcribeCallback="/twilio/call/get_venue/venue_recorded" finishOnKey="#" playBeep="true" maxLength="30" action="/twilio/call/end_call" method="POST"/>
                     </Response>
                    """)
@@ -199,18 +201,20 @@ class TwilioCallGetVenueHandler(tornado.web.RequestHandler):
 class TwilioCallEndHandler(tornado.web.RequestHandler):
     def post(self):
         logging.info('Ending call')
+        logging.info('POST parameters: %s' % json.dumps(self.request.arguments))
         self.set_header("Content-Type", "text/xml")
         self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
         self.write("""
                     <Response>
                         <Say>Thank you. We will attempt to add your reminder. Goodbye.</Say>
-                        <HangUp/>
+                        <Hangup/>
                     </Response>
                    """)
 
 
 class TwilioCallGotReminderHandler(tornado.web.RequestHandler):
     def post(self):
+        logging.info('POST parameters: %s' % json.dumps(self.request.arguments))
         reminder_text = self.request.arguments['TranscriptionText'][0]
         logging.info('Reminder text from transcript: %s' % reminder_text)
         logging.info('Finished recording reminder')
@@ -218,6 +222,7 @@ class TwilioCallGotReminderHandler(tornado.web.RequestHandler):
 
 class TwilioCallGotVenueHandler(tornado.web.RequestHandler):
     def post(self):
+        logging.info('POST parameters: %s' % json.dumps(self.request.arguments))
         reminder_text = self.request.arguments['TranscriptionText'][0]
         logging.info('Venue from transcript: %s' % reminder_text)
         logging.info('Finished recording venue')
