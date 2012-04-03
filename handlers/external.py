@@ -156,7 +156,7 @@ class TwilioCallHandler(tornado.web.RequestHandler):
         self.write(
         '<Response>'
             '<Say>Hello caller.</Say>'
-            '<Gather numDigits="1" action="/twilio/call/new_reminder" method="POST">'
+            '<Gather numDigits="1" action="/twilio/call/get_reminder" method="POST">'
                 '<Say>To enter a new reminder, press 1.</Say>'
             '</Gather>'
         '</Response>')
@@ -168,7 +168,7 @@ class TwilioCallHandler(tornado.web.RequestHandler):
         self.handle_call()
 
 
-class TwilioCallNewReminderHandler(tornado.web.RequestHandler):
+class TwilioCallGetReminderHandler(tornado.web.RequestHandler):
     def handle_call(self):
         print 'Getting reminder text'
         self.set_header("Content-Type", "text/xml")
@@ -177,7 +177,7 @@ class TwilioCallNewReminderHandler(tornado.web.RequestHandler):
         self.write("""
                     <Response>
                         <Say>After the beep, please say the reminder. Press the pound key when finished.</Say>
-                        <Record transcribe="true" transcribeCallback="/twilio/call/new_reminder/reminder_recorded" finishOnKey="#" playBeep="true" maxLength="30" method="POST"/>
+                        <Record transcribe="true" transcribeCallback="/twilio/call/get_reminder/reminder_recorded" finishOnKey="#" playBeep="true" maxLength="30" action="/twilio/call/get_venue" method="POST"/>
                     </Response>
                    """)
 
@@ -188,7 +188,7 @@ class TwilioCallNewReminderHandler(tornado.web.RequestHandler):
         self.handle_call()
 
 
-class TwilioCallNewReminderGotReminderHandler(tornado.web.RequestHandler):
+class TwilioCallGetVenueHandler(tornado.web.RequestHandler):
     def handle_call(self):
         print 'Got reminder text %s' % self.request.arguments['TranscriptionText'][0]
         print 'Getting reminder venue'
@@ -209,24 +209,32 @@ class TwilioCallNewReminderGotReminderHandler(tornado.web.RequestHandler):
     def get(self):
         self.handle_call()
 
-class TwilioCallNewReminderGotVenueHandler(tornado.web.RequestHandler):
+
+class TwilioCallGotReminderHandler(tornado.web.RequestHandler):
     def handle_call(self):
-        print 'Got venue %s' % self.request.arguments['TranscriptionText'][0]
-        print 'Finished recording reminder'
-        self.set_header("Content-Type", "text/xml")
-        self.set_header("Cache-Control", "no-store")
-        self.write('<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n')
-        self.write("""
-                    <Response>
-                        <Say>Thank you.</Say>
-                    </Response>
-                   """)
+        reminder_text = self.request.arguments['TranscriptionText'][0]
+        logging.info('Reminder text from transcript: %s' % reminder_text)
+        logging.info('Finished recording reminder')
 
     def post(self):
         self.handle_call()
 
     def get(self):
         self.handle_call()
+
+
+class TwilioCallGotVenueHandler(tornado.web.RequestHandler):
+    def handle_call(self):
+        reminder_text = self.request.arguments['TranscriptionText'][0]
+        logging.info('Venue from transcript: %s' % reminder_text)
+        logging.info('Finished recording venue')
+
+    def post(self):
+        self.handle_call()
+
+    def get(self):
+        self.handle_call()
+
 
 class RootHandler(tornado.web.RequestHandler):
     def get(self):

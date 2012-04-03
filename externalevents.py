@@ -24,9 +24,10 @@ application = tornado.web.Application([
     (r'/twilio/sms', external.TwilioHandler),
     (r'/fsq/push', external.FoursquareHandler),
     (r'/twilio/call', external.TwilioCallHandler),
-    (r'/twilio/call/new_reminder', external.TwilioCallNewReminderHandler),
-    (r'/twilio/call/new_reminder/reminder_recorded', external.TwilioCallNewReminderGotReminderHandler),
-    (r'/twilio/call/get_venue/venue_recorded', external.TwilioCallNewReminderGotVenueHandler),
+    (r'/twilio/call/get_reminder', external.TwilioCallGetReminderHandler),
+    (r'/twilio/call/get_venue', external.TwilioCallGetVenueHandler),
+    (r'/twilio/call/get_reminder/reminder_recorded', external.TwilioCallGotReminderHandler),
+    (r'/twilio/call/get_venue/venue_recorded', external.TwilioCallGotVenueHandler),
     (r'/', external.RootHandler),
 ])
 
