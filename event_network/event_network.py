@@ -4,6 +4,7 @@
 import tornado.ioloop
 import tornado.web
 import tornado.options
+import tornado.httpclient
 import logging
 import json
 import unicodedata
@@ -29,14 +30,14 @@ class EventHandler(tornado.web.RequestHandler):
         logging.info('EventHandler.post: ===============')  
         logging.info('EventHandler.post: Got event %s:%s' % (domain,name))
 
-        #if not self.request.arguments.has_key('from_test_page'):
-        #    self.finish()  # If this event was not received from the test page, call finish here to respond back to the client.  This makes the event processsing asynchronous.
+        if not self.request.arguments.has_key('from_test_page'):
+            self.finish()  # If this event was not received from the test page, call finish here to respond back to the client.  This makes the event processsing asynchronous.
 
         try:
             self.fired(self.request.arguments)
         finally:
-            #if self.request.arguments.has_key('from_test_page'):
-            #    self.redirect("/")  # If this came from the test page, redirect back to the test page
+            if self.request.arguments.has_key('from_test_page'):
+                self.redirect("/")  # If this came from the test page, redirect back to the test page
             logging.info('EventHandler.post: ---------------')
 
 
@@ -104,7 +105,15 @@ class UserCheckedInHandler(EventHandler):
         logging.info('UserCheckedInHandler.fired: Sending "reminder:list_available" event with attributes "%s"' % json.dumps(event_map))
 
         # Send the post
-        requests.post('http://localhost:8080/event/reminder/list_available', data=event_map)
+
+        http_client = httpclient.AsyncHTTPClient()
+        http_client.fetch("http://localhost:8080/event/reminder/list_available",
+                          lambda response: logging.info(response.body),
+                          method="POST",
+                          body=json.dumps(event_map),
+                          headers={"Content-Type" : "application/json"})
+
+        #requests.post('http://localhost:8080/event/reminder/list_available', data=event_map)
         #params = urllib.urlencode(event_map)
         #headers = {"Content-type": "application/x-www-form-urlencoded",
         #           "Accept": "text/plain"}
