@@ -16,7 +16,7 @@ And a few node modules (install npm, the node package manager, to get most of th
   - underscore
   - rsnbl (included as submodule)
 
-Use `npm install underscore connect mongodb` inside of the users directory (i.e. this one) to get these. To get the `rsnbl` submodule to install, run `git submodule init` and then `git submodule update`, and it should check out the right version for you into the right place.
+Use `npm install underscore connect mongodb step` inside of the users directory (i.e. this one) to get these. To get the `rsnbl` submodule to install, run `git submodule init` and then `git submodule update`, and it should check out the right version for you into the right place.
 
 # running it
 
