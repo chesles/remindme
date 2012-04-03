@@ -180,6 +180,7 @@ class TwilioCallGetReminderHandler(tornado.web.RequestHandler):
                         <Record transcribe="true" transcribeCallback="/twilio/call/get_reminder/reminder_recorded" finishOnKey="#" playBeep="true" maxLength="30" action="/twilio/call/get_venue" method="POST"/>
                     </Response>
                    """)
+        self.write('Sent response to get reminder text')
 
     def post(self):
         self.handle_call()
@@ -190,7 +191,6 @@ class TwilioCallGetReminderHandler(tornado.web.RequestHandler):
 
 class TwilioCallGetVenueHandler(tornado.web.RequestHandler):
     def handle_call(self):
-        print 'Got reminder text %s' % self.request.arguments['TranscriptionText'][0]
         print 'Getting reminder venue'
         self.set_header("Content-Type", "text/xml")
         self.set_header("Cache-Control", "no-store")
