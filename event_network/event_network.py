@@ -10,9 +10,18 @@ import json
 import unicodedata
 import httplib, urllib
 import requests
+import os
+import sys
+import string
+
 
 tornado.options.parse_command_line()
 
+exec_dir = string.join(sys.argv[0].split('/')[:-1], '/')
+
+logging.info('Changing working dir to %s ' % exec_dir)
+os.chdir(exec_dir)
+logging.info('Working dir is %s' % os.getcwd())
 
 import sms_notification_handler
 from user import *

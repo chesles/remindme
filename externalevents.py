@@ -5,8 +5,17 @@ import tornado.web
 import tornado.options
 
 import logging
+import string
+import os
+import sys
 
 tornado.options.parse_command_line()
+
+exec_dir = string.join(sys.argv[0].split('/')[:-1], '/')
+
+logging.info('Changing working dir to %s ' % exec_dir)
+os.chdir(exec_dir)
+logging.info('Working dir is %s' % os.getcwd())
 
 from handlers import external
 from conf import settings
@@ -21,7 +30,11 @@ application = tornado.web.Application([
     (r'/', external.RootHandler),
 ])
 
-if __name__ == '__main__':
+
+def main():
     logging.info('Starting External Events server')
-    application.listen(8083, ssl_options = settings.ssl_options)
+    application.listen(443, ssl_options = settings.ssl_options)
     tornado.ioloop.IOLoop.instance().start()
+
+if __name__ == '__main__':
+    main()

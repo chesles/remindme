@@ -178,7 +178,6 @@ class TwilioCallNewReminderHandler(tornado.web.RequestHandler):
                     <Response>
                         <Say>After the beep, please say the reminder. Press the pound key when finished.</Say>
                         <Record transcribe="true" transcribeCallback="/twilio/call/new_reminder/reminder_recorded" finishOnKey="#" playBeep="true" maxLength="30" method="POST"/>
-                        <Say>Sorry, I did not understand. Try again.</Say>
                     </Response>
                    """)
 
