@@ -41,5 +41,5 @@ production:
   database: frontend_production
   pool: 5
   username: root
-  password: 
+  password: bitwise
   socket: /var/run/mysqld/mysqld.sock
