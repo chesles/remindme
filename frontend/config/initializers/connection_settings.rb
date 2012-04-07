@@ -2,7 +2,7 @@ if Rails.env.production?
   USER_SERVICE_HOST = "jl78.info"
   USER_SERVICE_PORT = 8082
   EVENT_NETWORK_HOST = "jl78.info"
-  EVENT_NETWORK_PORT = 8080
+  EVENT_NETWORK_PORT = 80
 else
   USER_SERVICE_HOST = "localhost"
   USER_SERVICE_PORT = 8082
