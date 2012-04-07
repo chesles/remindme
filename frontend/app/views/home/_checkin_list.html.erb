@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>
+      Checkin Time
+    </th>
+    <th>
+      Place Name
+    </th>
+    <th>
+      Address
+    </th>
+    <th>
+      Lattitude
+    </th>
+    <th>
+      Longitude
+    </th>
+  </tr>
+  <% for checkin in checkin_list %>
+    <%= render(:partial => "checkin", :object => checkin) %>
+    <% if !user || user.id != session[:user_id] %>
+      <% break %>
+    <% end %>
+  <% end %>
+</table>
+

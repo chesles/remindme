@@ -4,16 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>RemindMe: <%= controller.action_name %></title>
+  <title>Reminders To-Go: <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'screen' %>
 </head>
 <body>
 
 <div id="header">
+	<img src="/images/logo.png" height="70" width="300">
 	
 <% user = User.find_by_id(session[:user_id])%>
 
-<% if user%>
+<% if user %>
   <div id="username">
     <%= user.first_name %> <%= user.last_name %>
   </div>
@@ -21,7 +22,17 @@
   	<%= link_to "Sign Out", :controller => 'home', :action => 'signout'%>
   </div>
   <div id="lastcheckin">
-    <b>Last Checkin:</b> Smith's Marketplace - Lehi, UT @ 9:15pm
+  	<% last_checkin = user.last_checkin
+  	   if last_checkin %>
+    	<div id="last_checkin_label">
+    		Last Checkin:
+    	</div>
+    	<div id="last_checkin">
+    		<%= last_checkin['venue']['name'] %> - <%= last_checkin['venue']['location']['city'] %>, <%= last_checkin['venue']['location']['state'] %>
+	    	<br/>
+	    	<%= Time.at(last_checkin["createdAt"].to_i).asctime %>
+    	</div>
+    <% end %>
   </div>
 <% end %>
 
@@ -72,7 +83,7 @@
 </div>
 
 <div id="footer">
-  <p>RemindMe <%= link_to "About", :controller => 'home', :action => 'about'%><br/>
+  <p>Reminders To-Go &nbsp;&nbsp;&nbsp; <%= link_to "About", :controller => 'home', :action => 'about'%><br/>
   Copyright (c) 2012 John Chesley, Jonathan Ludwig, Reed McGrew</p>
 </div>
 

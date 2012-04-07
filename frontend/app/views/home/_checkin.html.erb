@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <%= Time.at(checkin["createdAt"].to_i).asctime %>&nbsp;&nbsp;&nbsp;
+  </td>
+  <td>
+    <%= checkin["venue"]["name"] %>&nbsp;&nbsp;&nbsp;
+  </td>
+  <td>
+    <%= link_to("#{checkin["venue"]["location"]["address"]}, #{checkin["venue"]["location"]["city"]}, #{checkin["venue"]["location"]["state"]}, #{checkin["venue"]["location"]["postalCode"]}", 
+                "http://maps.google.com/maps?q=#{checkin["venue"]["location"]["lat"]}+#{checkin["venue"]["location"]["lng"]}", :target => "_blank") %>&nbsp;&nbsp;&nbsp;
+  </td>
+</tr>
+

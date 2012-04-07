@@ -21,35 +21,47 @@ class HomeController < ApplicationController
     # Continue the Foursquare dance!
     code = params[:code]
     if code
+      logger.info("Got Foursquare code #{code}")
+      logger.info("Getting Foursquare OAuth Token")
       auth_token = retrieve_access_token(code)
       if !auth_token
+        logger.error("Failed to get Foursquare OAuth Token")
         flash[:notice] = "Error authenticating with Foursquare!"
         flash[:level] = :error
         redirect_to :action => "index"
       end
+      logger.info("Got Foursquare OAuth Token #{auth_token}")
       session[:auth_token] = auth_token # Save it off in case the user chooses a username that is already in use. 
     else
       auth_token = session[:auth_token] # The user must have chosen a user name that was already in use and we've lost the code
                                         # Never fear though.  We saved off the auth token when we first got it.
     end
     
+    logger.info("Getting User's Foursquare account information")
     user_info = get_fsqr_user_info(auth_token)
     if !user_info
+      logger.error("Error getting User's Foursquare account information. Going back to index.")
       flash[:notice] = "Error getting Foursquare information!"
       flash[:level] = :error
       redirect_to :action => "index"
     end
+    logger.info("Got User's Foursquare account information #{user_info.inspect}")
+    
 
     # Now get the user's Information
     # See if this user is already registered
     user = User.find(:first, :conditions => "fsqr_id='#{user_info[:fsqr_id]}'")
     if user
+      session[:auth_token] = nil
       # This user is already registered, just sign him in.
       session[:user_id] = user.id
       flash[:notice] = "Welcome back #{user.first_name}!"
       flash[:level] = :success
+      logger.info("Existing user #{user.username} logged in. Redirecting to the user's reminder page.")
       redirect_to :action => 'reminders'
+      return
     end
+    logger.info("New user logged in. Staying on sign-in page to get a username.")
     
     # This is a new user, we need to ask for a user name.
     # Save off what we have in a session variable
@@ -73,6 +85,8 @@ class HomeController < ApplicationController
       session[:new_user_info][:username] = username
       user = User.new(session[:new_user_info])
       if user.save
+        session[:new_user_info] = nil
+        
         # Log the user in.
         session[:user_id] = user.id
         
@@ -91,12 +105,47 @@ class HomeController < ApplicationController
 
   def signout
     session[:user_id] = nil
+    session[:show_inactive_reminders] = nil
     redirect_to :action => 'index'
   end
 
   def reminders
     current_user = User.find_by_id(session[:user_id])
     @reminders = current_user.reminders
+  end
+  
+  def hide_inactive_reminders
+    session[:show_inactive_reminders] = nil
+    redirect_to :action => 'reminders'
+  end
+  
+  def show_inactive_reminders
+    session[:show_inactive_reminders] = true
+    redirect_to :action => 'reminders'
+  end
+  
+  def complete_reminder
+    begin
+      current_user = User.find_by_id(session[:user_id])
+      url = "http://localhost:8082/#{current_user.username}/reminders/#{params[:reminder_id]}"
+      response = RestClient.put url, {:active => "0"}.to_json, :content_type => :json, :accept => :json
+    rescue
+      flash[:notice] = "Error completing reminder"
+      flash[:level] = :error
+    end
+    redirect_to :action => 'reminders'
+  end
+  
+  def activate_reminder
+    begin
+      current_user = User.find_by_id(session[:user_id])
+      url = "http://localhost:8082/#{current_user.username}/reminders/#{params[:reminder_id]}"
+      response = RestClient.put url, {:active => "1"}.to_json, :content_type => :json, :accept => :json
+    rescue
+      flash[:notice] = "Error re-activating reminder"
+      flash[:level] = :error
+    end
+    redirect_to :action => 'reminders'
   end
   
   def new_reminder
@@ -121,6 +170,13 @@ class HomeController < ApplicationController
   end
 
   def checkins
+    @user = User.find_by_id(session[:user_id])
+    @checkin_list = @user.checkins
+    if @checkin_list.is_a?(String)
+      flash[:notice] = @checkin_list
+      @checkin_list = nil
+    end
+    
   end
 
   def settings

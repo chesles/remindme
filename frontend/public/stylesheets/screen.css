@@ -106,6 +106,18 @@ html {
   margin-bottom: 0.5em;
 }
 
+#last_checkin_label {
+  position: relative;
+  float: left;
+  padding-right:0.5em;
+  font-weight:bold;
+}
+
+#last_checkin {
+  position: relative;
+  float: left;
+}
+
 #mainlinks {
   position: absolute;
   top: 90px;
@@ -132,10 +144,10 @@ div.mainlink {
 }
 
 a.mainlink:link {
-	color:#000000;
-	font-weight:bold;
-	font-size:1.2em;
-	text-decoration:none;
+  color:#000000;
+  font-weight:bold;
+  font-size:1.2em;
+  text-decoration:none;
 }      /* unvisited link */
 
 a.mainlink:visited {color:#000000;}  /* visited link */
@@ -159,18 +171,56 @@ a.mainlink:active {
 
 div.reminder {
   margin: 0;
-  height: 2em;
+  height: 3em;
   border-bottom:1px solid #aaaaaa;
   padding-top: 0.8em;
   padding-left: 0;
 }
 
 
-div.remindertext, div.reminderseparator, div.reminderlocation {
+div.reminder_action, div.remindertext, div.remindertext_inactive, div.reminderlocation, div.reminderlocation_inactive, div.reminder_state {
   position: relative;
   float: left;
   margin-left: 0.5em;
   margin-right: 0.5em;
+}
+
+div.reminder_action {
+  width:70px;
+}
+
+div.remindertext, div.remindertext_inactive {
+  width:200px;
+}
+
+div.remindertext {
+  font-weight:bold;
+}
+
+div.remindertext_inactive {
+  text-decoration: line-through;
+}
+
+div.reminderlocation, div.reminderlocation_inactive {
+  width:150px;
+}
+
+div.reminderlocation {
+  font-weight:bold;
+}
+
+div.reminderlocation_inactive {
+  text-decoration: line-through;
+}
+
+#reminder_list_title, #reminder_list_toggle {
+  position: relative;
+  float: left;
+  margin-right: 2em;
+}
+
+#reminder_list_toggle {
+  top: 24px;
 }
 
 #reminder_left_column {
@@ -187,6 +237,16 @@ div.remindertext, div.reminderseparator, div.reminderlocation {
   position: absolute;
   top: 0;
   left: 300px;
+  right: 0;
+  bottom: 0;
+  text-align:left;
+  padding: 0; 
+}
+
+#checkin_page {
+  position: absolute;
+  top: 0;
+  left: 0;
   right: 0;
   bottom: 0;
   text-align:left;

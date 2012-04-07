@@ -1,2 +1,26 @@
-<h1>Home#checkins</h1>
-<p>Find me in app/views/home/checkins.html.erb</p>
+<div id="checkin_page">
+	<div id="reminder_list_header">
+		<h2>Your Foursquare Checkin History</h2>
+	</div>
+	<div id="reminder_list">
+	    <table>
+	      <tr>
+	        <th>
+	          Checkin Time
+	        </th>
+	        <th>
+	          Place Name
+	        </th>
+	        <th>
+	          Address
+	        </th>
+	      </tr>
+	      <% for checkin in @checkin_list %>
+	        <%= render(:partial => "checkin", :object => checkin) %>
+	        <% if !@user || @user.id != session[:user_id] %>
+	          <% break %>
+	        <% end %>
+	      <% end %>
+	    </table>
+	</div>
+</div>

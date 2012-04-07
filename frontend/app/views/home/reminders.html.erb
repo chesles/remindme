@@ -8,21 +8,44 @@
 </div>
 <div id="reminder_right_column">
 	<div id="reminder_list_header">
-		<h2>Reminder List</h2>
+		<div id="reminder_list_title">
+			<h2>Reminder List</h2>
+		</div>
+		<div id="reminder_list_toggle">
+			<% if session[:show_inactive_reminders] %>
+				<%= link_to "Hide Inactive Reminders", :action => 'hide_inactive_reminders' %>
+			<% else %>
+				<%= link_to "Show Inactive Reminders", :action => 'show_inactive_reminders' %>
+			<% end %>
+		</div>
 	</div>
 	<div id="reminder_list">
 		<% @reminders.each do |reminder| %>
-			<div class="reminder">
-				<div class="remindertext">
-					<%= reminder['text']%>
+			<% unless reminder['active'] == '0' && !session[:show_inactive_reminders] %>
+				<div class="reminder">
+					<div class="reminder_action">
+						<% unless reminder['active'] == '0' %>
+							<%= link_to "Complete", :action => 'complete_reminder', :reminder_id => reminder['_id'] %>
+						<% else %>
+							<%= link_to "Re-activate", :action => 'activate_reminder', :reminder_id => reminder['_id'] %>
+						<% end %>
+					</div>
+					<% if reminder['active'] == '0' %>
+					<div class="remindertext_inactive">
+					<% else %>
+					<div class="remindertext">
+					<% end %>
+						<%= reminder['text']%>
+					</div>
+					<% if reminder['active'] == '0' %>
+					<div class="reminderlocation_inactive">
+					<% else %>
+					<div class="reminderlocation">
+					<% end %>
+						@ <%= reminder['location'] %>
+					</div>
 				</div>
-				<div class="reminderseparator">
-					@
-				</div>
-				<div class="reminderlocation">
-					<%= reminder['location'] %>
-				</div>
-			</div>
+			<% end %>
 		<% end %>
 	</div>
 </div>

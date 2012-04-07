@@ -1,8 +1,10 @@
 require 'rest_client'
+require 'rubygems'
+require 'httpclient'
 require 'json'
 
 class User < ActiveRecord::Base
-  validates_presence_of :username, :first_name, :last_name, :phone_number, :email_address, :fsqr_id, :user_type
+  validates_presence_of :username, :first_name, :last_name, :phone_number, :email_address, :fsqr_id, :user_type, :fsqr_oauth_token
   validates_uniqueness_of :username
   
   def is_admin
@@ -39,4 +41,37 @@ class User < ActiveRecord::Base
     
     super
   end
+
+  def checkins
+    begin
+      client = HTTPClient.new
+      uri = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=#{self.fsqr_oauth_token}&v=20120125"
+      logger.info("Using URI #{uri} to get checkin list")
+      http_response = client.get_content(uri)
+      response_hash = JSON.parse(http_response)
+      checkin_list = response_hash["response"]["checkins"]["items"]
+      logger.info("Returning checkin list.")
+      return checkin_list
+    rescue
+      logger.error("Got exception getting checkin list.")
+      return nil
+    end
+  end
+  
+  def last_checkin
+    begin
+      client = HTTPClient.new
+      uri = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=#{self.fsqr_oauth_token}&limit=1&v=20120125"
+      logger.info("Using URI #{uri} to get checkin list")
+      http_response = client.get_content(uri)
+      response_hash = JSON.parse(http_response)
+      checkin_list = response_hash["response"]["checkins"]["items"]
+      logger.info("Returning checkin list.")
+      return checkin_list[0]
+    rescue
+      logger.error("Got exception getting checkin list.")
+      return nil
+    end
+  end
+
 end
