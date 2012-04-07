@@ -20,17 +20,17 @@ class User:
         return self._phone_number
 
     def reminders(self):
-        response = requests.get("http://localhost:8082/%s/reminders" % self._user_name)
+        response = requests.get("http://184.169.147.21/%s/reminders" % self._user_name)
         reminder_list = json.loads(response.text)
         return [Reminder(reminder['_id'], self._user_name, reminder['text'], reminder['location'], False if reminder['active'] == "0" else True) for reminder in reminder_list]
 
     def add_reminder(self, reminder):
         reminder_map = {"text" : reminder.item(), "location" : reminder.location(), "active" : 1 if reminder.is_active() else 0}
-        requests.post('http://localhost:8082/%s/reminders' % self._user_name, data=reminder_map)
+        requests.post('http://184.169.147.21/%s/reminders' % self._user_name, data=reminder_map)
 
     @classmethod
     def get_by_user_name(cls,user_name):
-        response = requests.get("http://localhost:8082/%s" % user_name)
+        response = requests.get("http://184.169.147.21/%s" % user_name)
         user_list = json.loads(response.text)
         if len(user_list) == 0:
             return None
@@ -40,7 +40,7 @@ class User:
 
     @classmethod
     def get_all_users(cls):
-        response = requests.get("http://localhost:8082/")
+        response = requests.get("http://184.169.147.21/")
         user_list = json.loads(response.text)
         return [User(user['username'], user['fsqid'], user['phone']) for user in user_list]
 

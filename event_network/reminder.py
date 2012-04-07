@@ -32,13 +32,13 @@ class Reminder:
 
     def activate(self):
         reminder_map = {"active" : 1}
-        requests.put('http://localhost:8082/%s/reminders/%s' % (self._user_name, self._reminder_id), data=reminder_map)
+        requests.put('http://184.169.147.21/%s/reminders/%s' % (self._user_name, self._reminder_id), data=reminder_map)
         self._active = True
 
     def inactivate(self):
         logging.info('Inactivating reminder %s for user %s' % (self._reminder_id, self._user_name))
         reminder_map = {"active" : 0}
-        requests.put('http://localhost:8082/%s/reminders/%s' % (self._user_name, self._reminder_id), data=reminder_map)
+        requests.put('http://184.169.147.21/%s/reminders/%s' % (self._user_name, self._reminder_id), data=reminder_map)
         self._active = False
 
     def venue_appies_to_reminider(self, venue):
