@@ -115,7 +115,7 @@ class UserCheckedInHandler(EventHandler):
 
         # Send the post
         http_client = httpclient.AsyncHTTPClient()
-        http_client.fetch("http://localhost:8080/event/reminder/list_available",
+        http_client.fetch("http://localhost/event/reminder/list_available",
                           lambda response: logging.info(response.body),
                           method="POST",
                           body=urllib.urlencode(event_map),
