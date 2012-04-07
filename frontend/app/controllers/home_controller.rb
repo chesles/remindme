@@ -8,6 +8,13 @@ require 'uri'
 class HomeController < ApplicationController
   def index
     current_user = User.find_by_id(session[:user_id])
+    if !current_user && Rails.env.development?
+      my_user = User.find(:first, :conditions => "username='jrl'") 
+      if my_user
+        session[:user_id] = my_user.id
+        current_user = my_user
+      end
+    end
     redirect_to :action => 'reminders' if current_user
   end
 
