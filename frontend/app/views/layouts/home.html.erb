@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>RemindMe: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'screen' %>
+</head>
+<body>
+
+<div id="header">
+	
+<% user = User.find_by_id(session[:user_id])%>
+
+<% if user%>
+  <div id="username">
+    <%= user.first_name %> <%= user.last_name %>
+  </div>
+  <div id="signout">
+  	<%= link_to "Sign Out", :controller => 'home', :action => 'signout'%>
+  </div>
+  <div id="lastcheckin">
+    <b>Last Checkin:</b> Smith's Marketplace - Lehi, UT @ 9:15pm
+  </div>
+<% end %>
+
+  <div id="mainlinks">
+  	<% if params[:controller] == 'home' && params[:action] == 'reminders' %>
+    <div id="selectedlink" class="mainlink">
+    <% else %>
+    <div class="mainlink">
+    <% end %>
+      <%= link_to "Reminders", {:controller => 'home', :action => 'reminders'}, :class => 'mainlink' %>
+    </div>
+  	<% if params[:controller] == 'home' && params[:action] == 'checkins' %>
+    <div id="selectedlink" class="mainlink">
+    <% else %>
+    <div class="mainlink">
+    <% end %>
+      <%= link_to "Checkin History", {:controller => 'home', :action => 'checkins'}, :class => 'mainlink' %>
+    </div>
+  	<% if params[:controller] == 'home' && params[:action] == 'settings' %>
+    <div id="selectedlink" class="mainlink">
+    <% else %>
+    <div class="mainlink">
+    <% end %>
+      <%= link_to "My Settings", {:controller => 'home', :action => 'settings'}, :class => 'mainlink' %>
+    </div>
+<% if user && user.is_admin %>
+  	<% if params[:controller] == 'users' %>
+    <div id="selectedlink" class="mainlink">
+    <% else %>
+    <div class="mainlink">
+    <% end %>
+		<%= link_to "Manage Users", {:controller => 'users', :index => 'index'}, :class => 'mainlink' %>
+    </div>
+<% end %>
+  </div>
+
+</div>
+
+<div id="container">
+<% if flash[:level] == :error %>
+	<p style="color: red">
+<% else %>
+	<p style="color: green">
+<% end %>
+<%= flash[:notice] %></p>
+
+<%= yield  %>
+</div>
+
+<div id="footer">
+  <p>RemindMe <%= link_to "About", :controller => 'home', :action => 'about'%><br/>
+  Copyright (c) 2012 John Chesley, Jonathan Ludwig, Reed McGrew</p>
+</div>
+
+</body>
+</html>

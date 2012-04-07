@@ -1,0 +1,87 @@
+Data Models
+===========
+
+User Model - Hijacked rails model to take advantage of validation and error reporting.
+----------
+- username      - Get from user
+- First Name    - Get from Foursquare.  User can change
+- Last Name     - Get from Foursquare.  User can change
+- phone number  - Get from Foursquare.  User can change
+- email address - Get from Foursquare.  User can change
+- fsqr id       - Get from Foursquare.
+
+Reminder Model
+--------------
+- reminder text
+- location
+- active
+- recurring (if time permits)
+
+Web Site
+========
+Welcome Page (only when user not logged in)
+- Authenticate with Foursquare
+- Create new account -> Page to ask for requested user name.
+                        Then link to authenticate with foursquare
+                        Upon completion, account is created.
+
+Logged in pages
+===============
+
+Layout
+- Header
+  - App Name
+  - User name
+  - Last Checkin
+  - Links for different content pages
+    - Reminders (default content)
+    - Checkin History
+    - User Settings
+- Footer
+  - App Name
+  - Copyright / contributers
+  - About Page
+  
+Reminders
+---------
+- Form to enter new reminders
+- Reminder list
+  - Toggle showing completed reminders
+  - Each Reminder has
+    - Reminder
+    - Location
+    - Complete if active
+    - re-active if in-active
+
+Checkin History
+---------------
+- For each checkin show
+  - Name
+  - Address
+  - Checkin Time
+
+User Settings
+-------------
+- First Name
+- Last Name
+- Phone Number
+- Email Address
+
+Rails Architecture
+==================
+
+Scaffolds
+---------
+User - controller restricted to administrators only
+
+Controllers
+-----------
+Home
+- index
+- about
+- register
+- login
+- logout
+- reminders
+- checkins
+- settings

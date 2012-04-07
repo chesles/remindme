@@ -34,7 +34,7 @@ def ascii(us):
 class EventHandler(tornado.web.RequestHandler):
     def post(self, domain, name):
         self.set_header("Content-Type", "text/plain")
-        self.write('OK\n')
+        self.write('OK')
 
         logging.info('EventHandler.post: ===============')  
         logging.info('EventHandler.post: Got event %s:%s' % (domain,name))
@@ -160,18 +160,11 @@ class IndexHandler(tornado.web.RequestHandler):
         self.render("index.html", users=User.get_all_users())
 
 
-class LogHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.set_header("Content-Type", "text/plain")
-        self.render("event_network.log")
-
-
 def main():
     logging.info("main: starting torando web server")
 
     application = tornado.web.Application([
         (r"/", IndexHandler),
-        (r"/log", LogHandler),
         (r"/event/(user)/(checked_in)", UserCheckedInHandler),
         (r"/event/(user)/(new_reminder)", NewRemniderSentHandler),
         (r"/event/(reminder)/(list_available)", ReminderListAvailableHandler),
