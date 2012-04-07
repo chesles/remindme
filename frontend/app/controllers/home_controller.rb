@@ -127,7 +127,7 @@ class HomeController < ApplicationController
   def complete_reminder
     begin
       current_user = User.find_by_id(session[:user_id])
-      url = "http://localhost:8082/#{current_user.username}/reminders/#{params[:reminder_id]}"
+      url = "http://#{USER_SERVICE_HOST}:#{USER_SERVICE_PORT}/#{current_user.username}/reminders/#{params[:reminder_id]}"
       response = RestClient.put url, {:active => "0"}.to_json, :content_type => :json, :accept => :json
     rescue
       flash[:notice] = "Error completing reminder"
@@ -139,7 +139,7 @@ class HomeController < ApplicationController
   def activate_reminder
     begin
       current_user = User.find_by_id(session[:user_id])
-      url = "http://localhost:8082/#{current_user.username}/reminders/#{params[:reminder_id]}"
+      url = "http://#{USER_SERVICE_HOST}:#{USER_SERVICE_PORT}/#{current_user.username}/reminders/#{params[:reminder_id]}"
       response = RestClient.put url, {:active => "1"}.to_json, :content_type => :json, :accept => :json
     rescue
       flash[:notice] = "Error re-activating reminder"
@@ -158,7 +158,7 @@ class HomeController < ApplicationController
     event_hash = {:reminder_text => params[:reminder_text],
                   :user_name => current_user.username}
                   
-    if HomeController.send_event("localhost", "/event", "user", "new_reminder", event_hash, 8080)
+    if HomeController.send_event(EVENT_NETWORK_HOST, "/event", "user", "new_reminder", event_hash, EVENT_NETWORK_PORT)
       flash[:notice] = "Your reminder was successfully sent"
       flash[:level] = :success
     else

@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   end
   
   def reminders
-    response = RestClient.get "http://localhost:8082/#{self.username}/reminders" 
+    response = RestClient.get "http://#{USER_SERVICE_HOST}:#{USER_SERVICE_PORT}/#{self.username}/reminders" 
     reminders = JSON.parse(response.to_str)   
   end
   
@@ -31,12 +31,12 @@ class User < ActiveRecord::Base
                 }
     
     # First see if the user exists
-    response = RestClient.get "http://localhost:8082/#{self.username}"
+    response = RestClient.get "http://#{USER_SERVICE_HOST}:#{USER_SERVICE_PORT}/#{self.username}"
     user_list =  JSON.parse(response.to_str)
     if user_list.empty?
-      response = RestClient.post "http://localhost:8082/#{self.username}", user_hash.to_json, :content_type => :json, :accept => :json 
+      response = RestClient.post "http://#{USER_SERVICE_HOST}:#{USER_SERVICE_PORT}/#{self.username}", user_hash.to_json, :content_type => :json, :accept => :json 
     else
-      response = RestClient.put "http://localhost:8082/#{self.username}", user_hash.to_json, :content_type => :json, :accept => :json
+      response = RestClient.put "http://#{USER_SERVICE_HOST}:#{USER_SERVICE_PORT}/#{self.username}", user_hash.to_json, :content_type => :json, :accept => :json
     end
     
     super
