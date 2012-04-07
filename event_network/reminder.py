@@ -9,7 +9,9 @@ class Reminder:
     def parse(cls, text):
         parts = text.split('@')
         if len(parts) != 2:
-            raise Exception('Invalid reminder syntax "%s"' % text)
+            parts = text.split(' at ')
+            if len(parts) != 2:
+                raise Exception('Invalid reminder syntax "%s"' % text)
         item = parts[0].strip()
         location = parts[1].strip()
         return Reminder(None, None, item, location, True)
