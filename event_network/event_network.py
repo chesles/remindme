@@ -171,7 +171,7 @@ def main():
         (r"/event/(\w+)/(\w+)", UnknownEventHandler),
     ])
 
-    application.listen(8080)
+    application.listen(80)
     tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":

@@ -6,11 +6,11 @@ ssl_options = {
 }
 
 users = {
-    "host": "localhost",
-    "port": 8082
+    "host": "184.169.147.21",
+    "port": 80
 }
 
 eventnetwork = {
     "host": "localhost",
-    "port": 8080
+    "port": 80
 }
