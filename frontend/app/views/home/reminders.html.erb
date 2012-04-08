@@ -1,10 +1,16 @@
 <div id="reminder_left_column">
-	<% form_tag :method => 'post', :action => 'new_reminder' do %>
-		<h2>Add New Reminder</h2>
-		<%= text_field_tag "reminder_text", nil, :size => "30" %>
-		<br/>
-		<%= submit_tag "Add" %>
-	<% end %>
+	<div id="new_reminder_header">
+		<div id="new_reminder_title">
+			<h2>Add New Reminder</h2>
+		</div>
+	</div>
+	<div id="new_reminder_form">
+		<% form_tag :method => 'post', :action => 'new_reminder' do %>
+			<%= text_field_tag "reminder_text", nil, :size => "30" %>
+			<br/>
+			<%= submit_tag "Add" %>
+		<% end %>
+	</div>
 </div>
 <div id="reminder_right_column">
 	<div id="reminder_list_header">

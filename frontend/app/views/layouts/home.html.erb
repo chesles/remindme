@@ -5,7 +5,12 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Reminders To-Go: <%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'screen' %>
+  <%= stylesheet_link_tag 'base_layout' %>
+  <%= stylesheet_link_tag 'base_format' %>
+  <% if true %>
+	  <%= stylesheet_link_tag 'desktop_layout' %>
+	  <%= stylesheet_link_tag 'desktop_format' %>
+  <% end %>
 </head>
 <body>
 

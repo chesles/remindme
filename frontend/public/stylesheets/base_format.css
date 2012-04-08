@@ -1,0 +1,111 @@
+/* the bit that does the work */
+
+body {
+  background:#fff; 
+  font-family:arial, verdana, sans-serif; 
+  font-size:76%;
+  }
+  
+#container {
+  font-family:"times new roman", serif;
+  font-size: 1.2em;
+  }
+
+#header {
+  background:#53829d;
+  border-bottom:4px solid #ffcd2b;
+  }
+
+
+#footer {
+  background:#73a2bd;
+  border-top:5px solid #53829d;
+  text-align:center;
+  }
+
+#username {
+  font-family: Helvetica,sans-serif;
+  font-size: 1.2em;
+}
+
+#signout {
+  font-family: Helvetica,sans-serif;
+  font-size: 1.2em;
+}
+
+#lastcheckin {
+  font-family: Helvetica,sans-serif;
+  font-size: 1em;
+}
+
+#last_checkin_label {
+  font-weight:bold;
+}
+
+#mainlinks {
+  font-family: Helvetica,sans-serif;
+  font-size: 1em;
+}
+
+div.mainlink {
+  background: #ffe58f;
+}
+
+a.mainlink:link {
+  color:#000000;
+  font-weight:bold;
+  font-size:1.2em;
+  text-decoration:none;
+}      /* unvisited link */
+
+a.mainlink:visited {color:#000000;}  /* visited link */
+a.mainlink:hover {color:#000000;}  /* mouse over link */
+a.mainlink:active {
+	color:#FF0000;
+}
+
+#selectedlink {
+	
+  background: #ffcd2b;
+}
+
+div.reminder {
+  border-bottom:1px solid #aaaaaa;
+}
+
+div.remindertext {
+  font-weight:bold;
+}
+
+div.remindertext_inactive {
+  text-decoration: line-through;
+}
+
+div.reminderlocation {
+  font-weight:bold;
+}
+
+div.reminderlocation_inactive {
+  text-decoration: line-through;
+}
+
+
+
+#reminder_right_column {
+  text-align:left;
+}
+
+#checkin_page {
+  text-align:left;
+}
+
+#new_reminder_header {
+  background: #cccccc
+}
+
+#reminder_list_header {
+  background: #cccccc
+}
+
+/* end of bit that does the work */
+

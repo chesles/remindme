@@ -1,0 +1,160 @@
+/* the bit that does the work */
+
+body {
+  margin:0;
+  border:0;
+  padding:0;
+  padding-right:21px;
+  }
+  
+html {
+  margin:0;
+  border:0;
+  padding:0;
+}
+
+/* for internet explorer */
+* html body {
+  padding:120px 0 50px 0; 
+  }
+
+#container {
+  padding:15px;
+  padding-top:0;
+  padding-bottom: 15px;
+  }
+
+* html #container {
+  height:100%; 
+  width:100%;
+  }
+
+#header {
+  width:100%; 
+  padding: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0;
+  }
+
+
+#footer {
+  width:100%; 
+  height:55px; 
+  padding-top: 7px;
+  }
+* html #footer {height:50px;}
+
+#username {
+  margin: 4px;
+  padding-top: 8px;
+}
+
+#signout {
+  margin: 4px;
+  padding-top: 8px;
+}
+
+#lastcheckin {
+  margin: 4px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+#last_checkin_label {
+  padding-right:0.5em;
+}
+
+#mainlinks {
+  padding-bottom: 0;
+  margin: 4px;
+  margin-top: 6px;
+  margin-bottom: 0;
+  height:25px;
+}
+
+div.mainlink {
+  position: relative;
+  float: left;
+  height:20px;
+  padding: 0.3em;
+  padding-bottom: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 5px;
+  margin-right: 6px;
+  margin-bottom: 0;
+}
+
+#newreminderform {
+  width: 345px;
+  padding-top: 0.7em;
+  margin: 5px;
+}
+
+div.reminder {
+  margin: 0;
+  height: 3em;
+  padding-top: 0.8em;
+  padding-left: 0;
+}
+
+
+div.reminder_action, div.remindertext, div.remindertext_inactive, div.reminderlocation, div.reminderlocation_inactive, div.reminder_state {
+  position: relative;
+  float: left;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+div.reminder_action {
+  width:70px;
+}
+
+div.remindertext, div.remindertext_inactive {
+  width:200px;
+}
+
+div.reminderlocation, div.reminderlocation_inactive {
+  width:150px;
+}
+
+#new_reminder_header {
+  padding-left:1em;
+  height:60px;
+}
+
+#new_reminder_form {
+  padding: 1em;
+}
+#new_reminder_title {
+  position: relative;
+  float: left;
+  margin-right: 2em;
+}
+
+#reminder_list_title, #reminder_list_toggle {
+  position: relative;
+  float: left;
+  margin-right: 2em;
+}
+
+#reminder_list_toggle {
+  top: 24px;
+}
+
+#reminder_left_column {
+  padding: 0;
+}
+
+#reminder_right_column {
+  padding: 0; 
+}
+
+#reminder_list_header {
+  padding-left:1em;
+  height:60px;
+}
+
+
+/* end of bit that does the work */
+
