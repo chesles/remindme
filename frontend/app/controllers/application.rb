@@ -16,7 +16,16 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
   
+  def is_browser_mobile(request)
+    user_agent = request.headers['HTTP_USER_AGENT']
+    return true if /android/i.match(user_agent)
+    return true if /iphone/i.match(user_agent)
+    return true if /ipad/i.match(user_agent)
+    return false
+  end
+  
 protected
+
   def authorize
     controller_authorize
   end
