@@ -28,7 +28,8 @@ body {
 	margin:0;
 	height: 3em;
 }
-#username {
+
+#show_username {
 	position: relative;
 	float: left;
   font-family: Helvetica,sans-serif;
@@ -116,5 +117,31 @@ div.reminderlocation_inactive {
   background: #cccccc
 }
 
+#remindme_blurb {
+	margin-left: auto;
+	margin-right: auto;
+	width: 40em;
+	text-align: left;
+}
+
+#auth_with_fqsr {
+	margin-left: auto;
+	margin-right: auto;
+	width: 60em;
+}
+
+#site_welcome {	
+	margin: 3em;
+	font-size: 1.2em;
+}
+
+#auth_with_fqsr_link {
+	margin: 3.5em;
+}
+
+#auth_with_fqsr_note {
+	margin: 3.5em;
+	margin-top: 0.5em;
+}
 /* end of bit that does the work */
 

@@ -1,11 +1,17 @@
 <h1>Welcome New User</h1>
 <div id="user_name_form">
 	<div id"user_name_info">
+		<p>
 		You do not yet have a RemindMe account. Enter the user name you would like to use for your
 		new RemindMe account and click 'Create Account'.
+		</p>
 	</div>
 	<% form_tag :action => 'create_new_user' do %>
-		username <%= text_field_tag 'username' %>
+		<p>
+		Select a user name <%= text_field_tag 'username' %>
+		</p>
+		<p>
 		<%= submit_tag 'Create Account' %>
+		</p>
 	<% end %>
 </div>

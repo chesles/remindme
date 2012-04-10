@@ -1,24 +1,16 @@
-<div id="remindme_blurb">
-	<p>
-		RemindMe is a location-based reminder service.  Have you ever said to your spouse or
-		roomate, "Next time we're at the grocery store, we need to get eggs"?  Then you either
-		never write it down, lose the shopping list or get to the store and realize you left
-		your shopping lust home?	
-	</p>
-	<p>
-		Well, now you can tell the RemindMe service all of your reminders and the location where
-		the reminders need to be done.  Remindme will keep track of your reminders and send you
-		a text message with all reminders that apply to specific venue when you checin there with
-		Foursuare.  Just text 'Get eggs @ the grocery store' to our reminder service.  Then when
-		you check in at any grocery store, RemindMe will send you a text to make sure you get the
-		eggs.
-	</p>
-</div>
 <div id="auth_with_fqsr">
+	<div id="site_welcome">
+		<p>
+		Welcome to Reminders To-Go, your location based reminder service.
+		</p>
+		<p>
+		Click <%= link_to "here", :controller => 'home', :action => 'about' %> to learn how it works.
+		</p>
+	</div>
+
 	<a id="auth_with_fqsr_link" href="<%= FSQR_SIGN_IN_URI %>">
 		<img id="auth_with_fqsr_button" src="images/connect-blue.png">
 	</a>
-	
 	<div id="auth_with_fqsr_note">
 		If you don't yet have a RemindMe account, one will be created for you.
 	</div>

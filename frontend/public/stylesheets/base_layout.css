@@ -54,7 +54,7 @@ img.logo {
 }
 
 
-#username {
+#show_username {
   margin: 4px;
   padding-top: 8px;
 }
@@ -183,8 +183,12 @@ div.reminderlocation, div.reminderlocation_inactive {
 
 #checkin_page {
   padding: 0; 
-  margin-left: 15px;
+  margin: 0;
   padding-top:10px;
+}
+
+#user_name_form {
+	padding: 15px;
 }
 
 /* end of bit that does the work */

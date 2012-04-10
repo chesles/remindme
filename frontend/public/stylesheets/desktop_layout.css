@@ -49,7 +49,7 @@ html {
   right: 0;
   }
 
-#username {
+#show_username {
   position: absolute;
   top: 0;
   right: 120px;
@@ -72,17 +72,6 @@ html {
   margin: 4px;
   margin-top: 0.5em;
   margin-bottom: 0.5em;
-}
-
-#last_checkin_label {
-  position: relative;
-  float: left;
-  padding-right:0.5em;
-}
-
-#last_checkin {
-  position: relative;
-  float: left;
 }
 
 #mainlinks {
