@@ -283,7 +283,7 @@ private
    response_hash = JSON.parse(http_response)
 
     # Return a hash of the user's Foursquare settings    
-    {
+    user_info = {
      :fsqr_oauth_token => fsqr_token,
      :fsqr_id => response_hash['response']['user']['id'],
      :first_name => response_hash['response']['user']['firstName'],
@@ -292,6 +292,12 @@ private
      :email_address => response_hash['response']['user']['contact']['email']
     }
     
+    user_info[:first_name] = "" if !user_info[:first_name]
+    user_info[:last_name] = "" if !user_info[:last_name]
+    user_info[:phone_number] = "" if !user_info[:phone_number]
+    user_info[:email_address] = "" if !user_info[:email_address]
+     
+    user_info
   end
 
   def http_get(uri)
