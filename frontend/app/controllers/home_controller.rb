@@ -292,10 +292,7 @@ private
      :email_address => response_hash['response']['user']['contact']['email']
     }
     
-    user_info[:first_name] = "First Name" if !user_info[:first_name]
-    user_info[:last_name] = "Last Name" if !user_info[:last_name]
     user_info[:phone_number] = "+1" if !user_info[:phone_number]
-    user_info[:email_address] = "Email" if !user_info[:email_address]
      
     user_info
   end

@@ -4,7 +4,7 @@ require 'httpclient'
 require 'json'
 
 class User < ActiveRecord::Base
-  validates_presence_of :username, :first_name, :last_name, :phone_number, :email_address, :fsqr_id, :user_type, :fsqr_oauth_token
+  validates_presence_of :username, :first_name, :phone_number, :email_address, :fsqr_id, :user_type, :fsqr_oauth_token
   validates_uniqueness_of :username
   
   def is_admin
