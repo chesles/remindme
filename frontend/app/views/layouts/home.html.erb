@@ -7,7 +7,7 @@
   <title>Reminders To-Go: <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'base_layout' %>
   <%= stylesheet_link_tag 'base_format' %>
-  <% if !controller.is_browser_mobile(request) %>
+  <% if false && !controller.is_browser_mobile(request) %>
 	  <%= stylesheet_link_tag 'desktop_layout' %>
 	  <%= stylesheet_link_tag 'desktop_format' %>
   <% end %>
@@ -20,11 +20,13 @@
 <% user = User.find_by_id(session[:user_id])%>
 
 <% if user %>
-  <div id="username">
-    <%= user.first_name %> <%= user.last_name %>
-  </div>
-  <div id="signout">
-  	<%= link_to "Sign Out", :controller => 'home', :action => 'signout'%>
+  <div id="user_greeting">
+	  <div id="username">
+	    <%= user.first_name %> <%= user.last_name %>
+	  </div>
+	  <div id="signout">
+	  	<%= link_to "Sign Out", :controller => 'home', :action => 'signout'%>
+	  </div>
   </div>
   <div id="lastcheckin">
   	<% last_checkin = user.last_checkin

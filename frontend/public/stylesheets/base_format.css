@@ -22,12 +22,22 @@ body {
   text-align:center;
   }
 
+#user_greeting {
+	padding:0;
+	border:0;
+	margin:0;
+	height: 3em;
+}
 #username {
+	position: relative;
+	float: left;
   font-family: Helvetica,sans-serif;
   font-size: 1.2em;
 }
 
 #signout {
+	position: relative;
+	float: left;
   font-family: Helvetica,sans-serif;
   font-size: 1.2em;
 }

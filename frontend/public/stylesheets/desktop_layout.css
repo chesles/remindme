@@ -16,13 +16,16 @@ html {
   }
 
 #header {
-  position:absolute; 
-  top:0; 
-  left:0; 
-  right: 0;
-  height:130px; 
+	position:absolute; 
+	top:0; 
+	left:0; 
+	right: 0;
+	height:130px; 
   }
-* html #header {height:120px;}
+
+* html #header {
+	height:130px;
+}
 
 #container {
   position:fixed;
@@ -31,9 +34,6 @@ html {
   bottom:70px; 
   right:0; 
   text-align:left;
-  margin: 0;
-  border: 0;
-  padding:0;
   }
 
 * html #container {
@@ -47,10 +47,7 @@ html {
   bottom:0; 
   left:0;
   right: 0;
-  height:65px; 
-  text-align:center; 
   }
-* html #footer {height:65px;}
 
 #username {
   position: absolute;
@@ -91,25 +88,7 @@ html {
 #mainlinks {
   position: absolute;
   bottom:0;
-  border:0;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  margin-left: 4px;
-  margin-right: 4px;
-  margin-top: 6px;
-  list-style: none;
   width: 600px;
-}
-
-div.mainlink {
-  position: relative;
-  float: left;
-  padding-bottom: 0;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 5px;
-  margin-right: 6px;
-  margin-bottom: 0;
 }
 
 #newreminderform {
@@ -162,14 +141,13 @@ div.reminderlocation, div.reminderlocation_inactive {
   top: 0;
   left: 0;
   width: 284px;
-  bottom: 4px;
-  padding-right: 1px;
+  bottom: 0;
 }
 
 #reminder_right_column {
   position: absolute;
   top: 0;
-  left: 287px;
+  left: 286px;
   right: 0;
   bottom: 0;
 }
@@ -180,7 +158,6 @@ div.reminderlocation, div.reminderlocation_inactive {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0; 
 }
 
 #reminder_list_header {
@@ -197,8 +174,6 @@ div.reminderlocation, div.reminderlocation_inactive {
   left: 0;
   right: 0;
   overflow: auto;
-  margin-left: 15px;
-  padding-top:10px;
 }
 
 * html #reminder_list {
