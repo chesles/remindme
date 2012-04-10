@@ -1,0 +1,7 @@
+<% if params[:controller] == controller_name && action_names.include?(params[:action])  %>
+	<div id="selectedlink" class="mainlink">
+<% else %>
+	<div class="mainlink">
+<% end %>
+	  <%= link_to tab_text, {:controller => controller_name, :action => action_names[0]}, :class => 'mainlink' %>
+	</div>

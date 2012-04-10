@@ -1,4 +1,8 @@
-<div id="user_settings">
+<div id="checkin_page">
+	<div id="reminder_list_header">
+		<h2>Edit Settings</h2>
+	</div>
+	<div id="reminder_list">
 	<% form_for(@user, :url => {:controller => 'home', :action => 'update_settings'}) do |f| %>
 	  <%= f.error_messages %>
 	  <p>
@@ -21,4 +25,5 @@
 	    <%= f.submit "Update" %>
 	  </p>
 	<% end %>
+	</div>
 </div>

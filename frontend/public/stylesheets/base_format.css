@@ -6,16 +6,15 @@ body {
   font-size:76%;
   }
   
+#header {
+  background:#53829d;
+  border-bottom:5px solid #ffcd2b;
+  }
+
 #container {
   font-family:"times new roman", serif;
   font-size: 1.2em;
   }
-
-#header {
-  background:#53829d;
-  border-bottom:4px solid #ffcd2b;
-  }
-
 
 #footer {
   background:#73a2bd;

@@ -15,7 +15,7 @@
 <body>
 
 <div id="header">
-	<img src="/images/logo.png" height="70" width="300">
+	<img class="logo" src="/images/logo.png" height="70" width="300">
 	
 <% user = User.find_by_id(session[:user_id])%>
 
@@ -42,35 +42,24 @@
 <% end %>
 
   <div id="mainlinks">
-  	<% if params[:controller] == 'home' && params[:action] == 'reminders' %>
-    <div id="selectedlink" class="mainlink">
-    <% else %>
-    <div class="mainlink">
-    <% end %>
-      <%= link_to "Reminders", {:controller => 'home', :action => 'reminders'}, :class => 'mainlink' %>
-    </div>
-  	<% if params[:controller] == 'home' && params[:action] == 'checkins' %>
-    <div id="selectedlink" class="mainlink">
-    <% else %>
-    <div class="mainlink">
-    <% end %>
-      <%= link_to "Checkin History", {:controller => 'home', :action => 'checkins'}, :class => 'mainlink' %>
-    </div>
-  	<% if params[:controller] == 'home' && params[:action] == 'settings' %>
-    <div id="selectedlink" class="mainlink">
-    <% else %>
-    <div class="mainlink">
-    <% end %>
-      <%= link_to "My Settings", {:controller => 'home', :action => 'settings'}, :class => 'mainlink' %>
-    </div>
-<% if user && user.is_admin %>
-  	<% if params[:controller] == 'users' %>
-    <div id="selectedlink" class="mainlink">
-    <% else %>
-    <div class="mainlink">
-    <% end %>
-		<%= link_to "Manage Users", {:controller => 'users', :index => 'index'}, :class => 'mainlink' %>
-    </div>
+<% if user %>
+  	<%= render(:partial => "layouts/tab", :locals => { :tab_text => 'Reminders', :controller_name => 'home', :action_names => ['reminders'], :params => params } ) %>
+
+  	<%= render(:partial => "layouts/tab", :locals => { :tab_text => 'Checkin History', :controller_name => 'home', :action_names => ['checkins'], :params => params } ) %>
+
+  	<%= render(:partial => "layouts/tab", :locals => { :tab_text => 'My Settings', :controller_name => 'home', :action_names => ['settings'], :params => params } ) %>
+
+	<% if user.is_admin %>
+
+  		<%= render(:partial => "layouts/tab", :locals => { :tab_text => 'Manage Users', :controller_name => 'users', :action_names => ['index', 'edit', 'new', 'show'], :params => params } ) %>
+  		
+  	<% end %>
+
+<% else %>
+
+  	<%= render(:partial => "layouts/tab", :locals => { :tab_text => 'Home', :controller_name => 'home', :action_names => ['index'], :params => params } ) %>
+
+  	<%= render(:partial => "layouts/tab", :locals => { :tab_text => 'About', :controller_name => 'home', :action_names => ['about'], :params => params } ) %>
 <% end %>
   </div>
 

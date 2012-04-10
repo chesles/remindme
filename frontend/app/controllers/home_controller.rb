@@ -44,35 +44,37 @@ class HomeController < ApplicationController
                                         # Never fear though.  We saved off the auth token when we first got it.
     end
     
-    logger.info("Getting User's Foursquare account information")
-    user_info = get_fsqr_user_info(auth_token)
-    if !user_info
-      logger.error("Error getting User's Foursquare account information. Going back to index.")
-      flash[:notice] = "Error getting Foursquare information!"
-      flash[:level] = :error
-      redirect_to :action => "index"
-    end
-    logger.info("Got User's Foursquare account information #{user_info.inspect}")
+    if auth_token
+      logger.info("Getting User's Foursquare account information")
+      user_info = get_fsqr_user_info(auth_token)
+      if !user_info
+        logger.error("Error getting User's Foursquare account information. Going back to index.")
+        flash[:notice] = "Error getting Foursquare information!"
+        flash[:level] = :error
+        redirect_to :action => "index"
+      end
+      logger.info("Got User's Foursquare account information #{user_info.inspect}")
     
 
-    # Now get the user's Information
-    # See if this user is already registered
-    user = User.find(:first, :conditions => "fsqr_id='#{user_info[:fsqr_id]}'")
-    if user
-      session[:auth_token] = nil
-      # This user is already registered, just sign him in.
-      session[:user_id] = user.id
-      flash[:notice] = "Welcome back #{user.first_name}!"
-      flash[:level] = :success
-      logger.info("Existing user #{user.username} logged in. Redirecting to the user's reminder page.")
-      redirect_to :action => 'reminders'
-      return
+      # Now get the user's Information
+      # See if this user is already registered
+      user = User.find(:first, :conditions => "fsqr_id='#{user_info[:fsqr_id]}'")
+      if user
+        session[:auth_token] = nil
+        # This user is already registered, just sign him in.
+        session[:user_id] = user.id
+        flash[:notice] = "Welcome back #{user.first_name}!"
+        flash[:level] = :success
+        logger.info("Existing user #{user.username} logged in. Redirecting to the user's reminder page.")
+        redirect_to :action => 'reminders'
+        return
+      end
+      logger.info("New user logged in. Staying on sign-in page to get a username.")
+      
+      # This is a new user, we need to ask for a user name.
+      # Save off what we have in a session variable
+      session[:new_user_info] = user_info
     end
-    logger.info("New user logged in. Staying on sign-in page to get a username.")
-    
-    # This is a new user, we need to ask for a user name.
-    # Save off what we have in a session variable
-    session[:new_user_info] = user_info
     
   end
   
